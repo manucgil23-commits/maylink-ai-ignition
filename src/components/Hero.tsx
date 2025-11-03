@@ -71,12 +71,12 @@ const Hero = () => {
             >
               <TypewriterText 
                 text="Conectando con "
-                delay={500}
+                delay={300}
               />
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
                 <TypewriterText 
                   text="posibilidades infinitas"
-                  delay={1300}
+                  delay={900}
                 />
               </span>
             </motion.h1>

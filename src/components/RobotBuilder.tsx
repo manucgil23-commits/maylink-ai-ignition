@@ -114,13 +114,24 @@ const RobotBuilder = () => {
 
           {/* Waving Arm (after complete) */}
           {buildingComplete && (
-            <motion.div
-              className="absolute top-16 -right-10 w-5 h-14 bg-brand-purple rounded-full origin-top"
-              animate={{ rotate: [0, 30, 0, 30, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-brand-purple-light rounded-full" />
-            </motion.div>
+            <>
+              <motion.div
+                className="absolute top-16 -right-10 w-5 h-14 bg-brand-purple rounded-full origin-top"
+                animate={{ rotate: [0, 30, 0, 30, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-brand-purple-light rounded-full" />
+              </motion.div>
+              
+              {/* Second arm */}
+              <motion.div
+                className="absolute top-16 -left-10 w-5 h-14 bg-brand-purple rounded-full origin-top"
+                animate={{ rotate: [0, -20, 0, -20, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
+              >
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-brand-purple-light rounded-full" />
+              </motion.div>
+            </>
           )}
         </motion.div>
       </motion.div>

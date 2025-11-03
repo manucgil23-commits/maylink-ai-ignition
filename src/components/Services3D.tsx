@@ -247,7 +247,7 @@ const Services3D = () => {
           </div>
 
           {/* Navigation */}
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-4">
+          <div className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 flex gap-4">
             <Button
               variant="outline"
               size="icon"

@@ -156,19 +156,17 @@ const WhyChooseUsEnhanced = () => {
                   >
                     <Icon className="w-7 h-7 text-white" />
                     
-                    {/* Orbiting Particle */}
+                    {/* Pulsing Ring Effect */}
                     <motion.div
-                      className="absolute w-2 h-2 bg-white rounded-full"
+                      className="absolute inset-0 rounded-xl border-2 border-brand-purple"
                       animate={{
-                        rotate: 360,
+                        scale: [1, 1.3, 1],
+                        opacity: [0.8, 0, 0.8],
                       }}
                       transition={{
-                        duration: 3,
+                        duration: 2,
                         repeat: Infinity,
-                        ease: "linear",
-                      }}
-                      style={{
-                        transformOrigin: "25px 0",
+                        ease: "easeOut",
                       }}
                     />
                   </motion.div>

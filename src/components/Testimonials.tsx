@@ -1,0 +1,177 @@
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const testimonials = [
+  {
+    name: "Carlos Méndez",
+    company: "PymeTech Solutions",
+    role: "Director General",
+    text: "Gracias a MayLink AI, nuestra web ahora responde automáticamente a los clientes. La eficiencia ha aumentado un 300% y nuestros clientes están encantados.",
+    rating: 5,
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+  },
+  {
+    name: "Laura Ríos",
+    company: "EstudioNova",
+    role: "Fundadora",
+    text: "Automatizamos nuestras reservas con IA y el cambio fue increíble. Ya no perdemos ninguna cita y podemos enfocarnos en lo que realmente importa: nuestros clientes.",
+    rating: 5,
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Laura",
+  },
+  {
+    name: "Miguel Torres",
+    company: "Digital Ventures",
+    role: "CEO",
+    text: "El equipo de MayLink AI transformó nuestra atención al cliente. El chatbot responde con precisión y la integración fue perfecta. Totalmente recomendable.",
+    rating: 5,
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Miguel",
+  },
+  {
+    name: "Ana Martínez",
+    company: "Consultora Horizonte",
+    role: "Directora de Operaciones",
+    text: "Profesionales de primer nivel. Entendieron perfectamente nuestras necesidades y crearon una solución que superó nuestras expectativas.",
+    rating: 5,
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana",
+  },
+  {
+    name: "David Sánchez",
+    company: "TechStart",
+    role: "CTO",
+    text: "La automatización que implementaron nos ha ahorrado más de 20 horas semanales. La inversión se pagó sola en menos de dos meses.",
+    rating: 5,
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+  },
+];
+
+const Testimonials = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextTestimonial = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  return (
+    <section id="resenas" className="py-20 md:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-background to-background" />
+
+      <div className="container mx-auto px-4 relative z-10" ref={ref}>
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+          >
+            Lo que dicen{" "}
+            <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
+              nuestros clientes
+            </span>
+          </motion.h2>
+          <motion.p
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.3 }}
+          >
+            Resultados reales de empresas que confiaron en nosotros
+          </motion.p>
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto">
+          <div className="relative">
+            {/* Main Testimonial Card */}
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="p-8 md:p-12 bg-gradient-card border-border relative overflow-hidden">
+                <Quote className="absolute top-4 right-4 w-16 h-16 text-brand-purple/10" />
+                
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <img
+                    src={testimonials[currentIndex].image}
+                    alt={testimonials[currentIndex].name}
+                    className="w-20 h-20 rounded-full bg-secondary"
+                  />
+                  
+                  <div className="flex-1">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-brand-purple text-brand-purple" />
+                      ))}
+                    </div>
+                    
+                    <p className="text-lg md:text-xl text-foreground mb-6 leading-relaxed italic">
+                      "{testimonials[currentIndex].text}"
+                    </p>
+                    
+                    <div>
+                      <p className="font-bold text-lg">{testimonials[currentIndex].name}</p>
+                      <p className="text-brand-purple">{testimonials[currentIndex].role}</p>
+                      <p className="text-muted-foreground text-sm">{testimonials[currentIndex].company}</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Navigation Buttons */}
+            <div className="flex gap-4 justify-center mt-8">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={prevTestimonial}
+                className="border-brand-purple hover:bg-brand-purple/10"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={nextTestimonial}
+                className="border-brand-purple hover:bg-brand-purple/10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+
+            {/* Indicators */}
+            <div className="flex gap-2 justify-center mt-6">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex ? "bg-brand-purple w-8" : "bg-muted"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Testimonials;

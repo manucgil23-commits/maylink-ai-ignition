@@ -1,13 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import Loader from "@/components/Loader";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import Services from "@/components/Services";
+import Testimonials from "@/components/Testimonials";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import FloatingBar from "@/components/FloatingBar";
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <Loader onLoadingComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <>
+          <Header />
+          <main>
+            <Hero />
+            <WhyChooseUs />
+            <Services />
+            <Testimonials />
+            <Contact />
+          </main>
+          <Footer />
+          <FloatingBar />
+        </>
+      )}
+    </>
   );
 };
 

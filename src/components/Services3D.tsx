@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { Code2, MessageSquareCode, Settings2, ArrowRight, X, Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import AnimatedRobot from "./AnimatedRobot";
 
 const services = [
   {
@@ -106,7 +105,7 @@ const Services3D = () => {
         </motion.div>
 
         {/* 3D Carousel */}
-        <div className="relative h-[600px] flex items-center justify-center mb-20">
+        <div className="relative h-[600px] flex items-center justify-center">
           <div className="relative w-full max-w-6xl">
             {services.map((service, index) => {
               const offset = index - currentIndex;
@@ -326,28 +325,6 @@ const Services3D = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Animated Robot Section */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 1, duration: 0.8 }}
-        >
-          <div className="flex flex-col items-center gap-8">
-            <div className="relative">
-              <AnimatedRobot />
-            </div>
-            <motion.p
-              className="text-lg text-muted-foreground max-w-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.3 }}
-            >
-              Nuestro equipo de IA trabaja 24/7 para crear las mejores soluciones para tu negocio
-            </motion.p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

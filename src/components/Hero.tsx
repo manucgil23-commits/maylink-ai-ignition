@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import logo from "@/assets/maylink-logo.png";
 import TypewriterText from "./TypewriterText";
+import RobotBuilder from "./RobotBuilder";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -115,112 +116,125 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Animated Logo with Robot */}
+          {/* Animated Logo with Robot Building */}
           <motion.div
             className="flex-1 relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative w-full max-w-md mx-auto">
-              {/* Main Logo */}
-              <motion.img
-                src={logo}
-                alt="MayLink AI"
-                className="w-full h-auto"
+            <div className="relative w-full max-w-lg mx-auto h-[500px]">
+              {/* Main Logo - being built */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              />
-
-              {/* Glow Effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full blur-3xl bg-brand-purple/30"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-
-              {/* Robot Working Animation */}
-              <motion.div
-                className="absolute -top-12 -right-12"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
               >
+                <img
+                  src={logo}
+                  alt="MayLink AI"
+                  className="w-80 h-80 relative z-10"
+                />
+
+                {/* Logo Glow Effect */}
                 <motion.div
-                  className="relative"
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 rounded-full blur-3xl bg-brand-purple/30"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                />
+
+                {/* Building Progress Overlay */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ clipPath: "inset(100% 0 0 0)" }}
+                  animate={{ clipPath: "inset(0% 0 0 0)" }}
+                  transition={{ duration: 4, delay: 1 }}
                 >
-                  {/* Robot Icon */}
-                  <div className="w-20 h-20 bg-gradient-to-br from-brand-purple to-brand-purple-dark rounded-2xl flex items-center justify-center shadow-glow relative">
-                    <Sparkles className="w-10 h-10 text-white" />
-                    
-                    {/* Working Indicator */}
-                    <motion.div
-                      className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        boxShadow: [
-                          "0 0 0 0 rgba(34, 197, 94, 0.7)",
-                          "0 0 0 10px rgba(34, 197, 94, 0)",
-                          "0 0 0 0 rgba(34, 197, 94, 0)",
-                        ],
-                      }}
+                  <img
+                    src={logo}
+                    alt="MayLink AI Building"
+                    className="w-80 h-80"
+                  />
+                </motion.div>
+
+                {/* Pulse Effect when complete */}
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  initial={{ scale: 1, opacity: 0 }}
+                  animate={{
+                    scale: [1, 1.5, 2],
+                    opacity: [0, 0.5, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: 5,
+                  }}
+                  style={{
+                    background:
+                      "radial-gradient(circle, hsl(277 100% 62% / 0.4) 0%, transparent 70%)",
+                  }}
+                />
+              </motion.div>
+
+              {/* Robot Builder Component */}
+              <RobotBuilder />
+
+              {/* Circuit Lines around Logo */}
+              <svg
+                className="absolute inset-0 w-full h-full"
+                style={{ zIndex: 5 }}
+              >
+                {[...Array(8)].map((_, i) => {
+                  const angle = (i * 360) / 8;
+                  const startRadius = 120;
+                  const endRadius = 200;
+                  const x1 = 250 + startRadius * Math.cos((angle * Math.PI) / 180);
+                  const y1 = 250 + startRadius * Math.sin((angle * Math.PI) / 180);
+                  const x2 = 250 + endRadius * Math.cos((angle * Math.PI) / 180);
+                  const y2 = 250 + endRadius * Math.sin((angle * Math.PI) / 180);
+
+                  return (
+                    <motion.line
+                      key={i}
+                      x1={x1}
+                      y1={y1}
+                      x2={x2}
+                      y2={y2}
+                      stroke="hsl(277 100% 62%)"
+                      strokeWidth="2"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: [0, 0.6, 0] }}
                       transition={{
                         duration: 2,
                         repeat: Infinity,
-                      }}
-                    >
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    </motion.div>
-                  </div>
-                  
-                  {/* Sparks Effect */}
-                  {[...Array(4)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1.5 h-1.5 bg-brand-purple-light rounded-full"
-                      style={{
-                        top: "50%",
-                        left: "50%",
-                      }}
-                      animate={{
-                        x: [0, Math.cos((i * Math.PI) / 2) * 30],
-                        y: [0, Math.sin((i * Math.PI) / 2) * 30],
-                        opacity: [0, 1, 0],
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        delay: i * 0.2,
-                        ease: "easeOut",
+                        delay: 2 + i * 0.2,
                       }}
                     />
-                  ))}
-                </motion.div>
-              </motion.div>
+                  );
+                })}
+              </svg>
 
-              {/* Orbiting Elements */}
-              {[...Array(3)].map((_, i) => (
+              {/* Floating Tech Elements */}
+              {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-3 h-3 bg-brand-purple rounded-full"
+                  className="absolute w-3 h-3 border-2 border-brand-purple"
                   style={{
-                    top: "50%",
-                    left: "50%",
+                    top: `${20 + Math.random() * 60}%`,
+                    left: `${10 + Math.random() * 80}%`,
                   }}
                   animate={{
-                    x: [0, Math.cos((i * 2 * Math.PI) / 3) * 150],
-                    y: [0, Math.sin((i * 2 * Math.PI) / 3) * 150],
                     rotate: 360,
+                    y: [0, -30, 0],
+                    opacity: [0.3, 0.8, 0.3],
                   }}
                   transition={{
-                    duration: 8,
+                    duration: 4 + Math.random() * 2,
                     repeat: Infinity,
-                    ease: "linear",
                     delay: i * 0.5,
                   }}
                 />

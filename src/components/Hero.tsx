@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import logo from "@/assets/maylink-logo.png";
+import TypewriterText from "./TypewriterText";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -67,9 +68,15 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Conectando con{" "}
+              <TypewriterText 
+                text="Conectando con "
+                delay={500}
+              />
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-                posibilidades infinitas
+                <TypewriterText 
+                  text="posibilidades infinitas"
+                  delay={1300}
+                />
               </span>
             </motion.h1>
 

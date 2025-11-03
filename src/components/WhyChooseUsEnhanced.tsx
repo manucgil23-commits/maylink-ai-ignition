@@ -1,0 +1,271 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { Lightbulb, Puzzle, Heart, TrendingUp, ChevronDown } from "lucide-react";
+import { Card } from "@/components/ui/card";
+
+const reasons = [
+  {
+    icon: Lightbulb,
+    title: "Innovación continua",
+    description: "Aplicamos lo más avanzado en IA para mantener tu negocio a la vanguardia tecnológica.",
+    expandedContent: "Nuestro equipo está constantemente investigando y aplicando las últimas tecnologías en inteligencia artificial. Trabajamos con modelos de lenguaje de última generación, visión por computadora y aprendizaje automático para garantizar que tu negocio siempre esté un paso adelante.",
+    color: "from-cyan-500 to-blue-500",
+  },
+  {
+    icon: Puzzle,
+    title: "Soluciones personalizadas",
+    description: "Adaptamos la tecnología a tus objetivos específicos, no al revés.",
+    expandedContent: "Cada negocio es único. Por eso, diseñamos soluciones a medida que se integran perfectamente con tus procesos existentes. No ofrecemos plantillas genéricas, sino desarrollo personalizado que resuelve tus desafíos específicos.",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    icon: Heart,
+    title: "Atención cercana",
+    description: "Comunicación directa y humana. Estamos contigo en cada paso del proceso.",
+    expandedContent: "Creemos en las relaciones a largo plazo. Tendrás un equipo dedicado que conoce tu negocio y responde rápidamente a tus necesidades. Ofrecemos soporte continuo, formación personalizada y actualizaciones regulares.",
+    color: "from-rose-500 to-orange-500",
+  },
+  {
+    icon: TrendingUp,
+    title: "Resultados medibles",
+    description: "Impacto real con datos. Transformamos tu inversión en crecimiento tangible.",
+    expandedContent: "Implementamos sistemas de análisis y métricas desde el inicio. Recibirás informes detallados sobre el rendimiento de tus automatizaciones: tiempo ahorrado, conversiones mejoradas, satisfacción del cliente y ROI claro.",
+    color: "from-amber-500 to-yellow-500",
+  },
+];
+
+const WhyChooseUsEnhanced = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  return (
+    <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+      
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-brand-purple/30 rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [1, 2, 1],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10" ref={ref}>
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+          >
+            ¿Por qué elegir{" "}
+            <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
+              MayLink AI
+            </span>
+            ?
+          </motion.h2>
+          <motion.p
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.3 }}
+          >
+            Más que tecnología, ofrecemos partnership estratégico para tu transformación digital
+          </motion.p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {reasons.map((reason, index) => {
+            const Icon = reason.icon;
+            const isExpanded = expandedCard === index;
+            
+            return (
+              <motion.div
+                key={reason.title}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+              >
+                <Card
+                  className={`h-full p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden ${
+                    isExpanded ? "lg:col-span-2 border-brand-purple shadow-purple" : ""
+                  }`}
+                  onClick={() => setExpandedCard(isExpanded ? null : index)}
+                >
+                  {/* Hover Glow Effect */}
+                  <motion.div
+                    className={`absolute inset-0 bg-gradient-to-br ${reason.color} opacity-0 group-hover:opacity-10 transition-opacity`}
+                    animate={
+                      isExpanded
+                        ? {
+                            opacity: [0.05, 0.1, 0.05],
+                          }
+                        : {}
+                    }
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
+                  />
+
+                  {/* Floating Code Lines Effect */}
+                  {isExpanded && (
+                    <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
+                      {[...Array(5)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="h-0.5 bg-brand-purple rounded-full mb-2"
+                          initial={{ width: 0 }}
+                          animate={{ width: ["0%", "100%", "0%"] }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            delay: i * 0.2,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  <motion.div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${reason.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform relative`}
+                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Icon className="w-7 h-7 text-white" />
+                    
+                    {/* Orbiting Particle */}
+                    <motion.div
+                      className="absolute w-2 h-2 bg-white rounded-full"
+                      animate={{
+                        rotate: 360,
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                      style={{
+                        transformOrigin: "25px 0",
+                      }}
+                    />
+                  </motion.div>
+
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-purple transition-colors">
+                    {reason.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+                    {reason.description}
+                  </p>
+
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="border-t border-border/50 pt-4 mt-2">
+                          <p className="text-foreground leading-relaxed text-sm">
+                            {reason.expandedContent}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <motion.div
+                    className="flex items-center gap-2 text-brand-purple text-sm font-medium mt-4"
+                    animate={
+                      isExpanded
+                        ? { y: [0, -5, 0] }
+                        : {}
+                    }
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                    }}
+                  >
+                    <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </motion.div>
+                  </motion.div>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Interactive Stats */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
+        >
+          {[
+            { value: "50+", label: "Proyectos completados" },
+            { value: "98%", label: "Satisfacción cliente" },
+            { value: "24/7", label: "Soporte disponible" },
+            { value: "3 días", label: "Respuesta garantizada" },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="text-center p-6 bg-gradient-card border border-border/50 rounded-xl hover:border-brand-purple transition-all group"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 1 + i * 0.1 }}
+            >
+              <motion.div
+                className="text-4xl font-bold bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent mb-2"
+                animate={{
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              >
+                {stat.value}
+              </motion.div>
+              <div className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default WhyChooseUsEnhanced;

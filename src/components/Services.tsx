@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Globe, Bot, Sparkles, ArrowRight } from "lucide-react";
+import { Code2, MessageSquareCode, Settings2, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import AnimatedRobot from "./AnimatedRobot";
 
 const services = [
   {
-    icon: Globe,
+    icon: Code2,
     title: "Web Express",
     price: "desde 300 €",
     description: "Páginas web profesionales, rápidas y modernas que convierten visitantes en clientes.",
@@ -17,10 +18,10 @@ const services = [
       "Integración con redes sociales",
       "Panel de administración",
     ],
-    color: "from-blue-500 to-cyan-500",
+    gradient: "from-cyan-500 via-blue-500 to-purple-500",
   },
   {
-    icon: Bot,
+    icon: MessageSquareCode,
     title: "IA Interactiva",
     price: "desde 600 €",
     description: "Chatbots inteligentes y automatizaciones que atienden a tus clientes 24/7.",
@@ -30,11 +31,11 @@ const services = [
       "Respuestas personalizadas",
       "Integración con WhatsApp",
     ],
-    color: "from-purple-500 to-pink-500",
+    gradient: "from-purple-500 via-pink-500 to-rose-500",
     featured: true,
   },
   {
-    icon: Sparkles,
+    icon: Settings2,
     title: "Solución a medida",
     price: "consultar",
     description: "Automatizaciones avanzadas totalmente personalizadas para desafíos únicos.",
@@ -44,7 +45,7 @@ const services = [
       "Integración con sistemas existentes",
       "Soporte prioritario continuo",
     ],
-    color: "from-orange-500 to-red-500",
+    gradient: "from-orange-500 via-amber-500 to-yellow-500",
   },
 ];
 
@@ -113,13 +114,61 @@ const Services = () => {
                     </div>
                   )}
 
-                  <motion.div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <Icon className="w-8 h-8 text-white" />
-                  </motion.div>
+                  {/* Icon with Orbiting Effect */}
+                  <div className="relative w-24 h-24 mx-auto mb-6">
+                    <motion.div
+                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center`}
+                      animate={{
+                        boxShadow: [
+                          "0 0 20px rgba(168, 85, 247, 0.4)",
+                          "0 0 40px rgba(168, 85, 247, 0.6)",
+                          "0 0 20px rgba(168, 85, 247, 0.4)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <Icon className="w-10 h-10 text-white" strokeWidth={1.5} />
+                    </motion.div>
+
+                    {/* Orbiting Particles */}
+                    {[...Array(3)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full bg-brand-purple"
+                        style={{
+                          marginLeft: -4,
+                          marginTop: -4,
+                        }}
+                        animate={{
+                          x: [
+                            0,
+                            Math.cos((i * 2 * Math.PI) / 3 + Math.PI / 2) * 45,
+                            Math.cos((i * 2 * Math.PI) / 3 + Math.PI) * 45,
+                            Math.cos((i * 2 * Math.PI) / 3 + (3 * Math.PI) / 2) * 45,
+                            0,
+                          ],
+                          y: [
+                            0,
+                            Math.sin((i * 2 * Math.PI) / 3 + Math.PI / 2) * 45,
+                            Math.sin((i * 2 * Math.PI) / 3 + Math.PI) * 45,
+                            Math.sin((i * 2 * Math.PI) / 3 + (3 * Math.PI) / 2) * 45,
+                            0,
+                          ],
+                          opacity: [0.3, 0.8, 0.3, 0.8, 0.3],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "linear",
+                          delay: i * 0.5,
+                        }}
+                      />
+                    ))}
+                  </div>
 
                   <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
                   <p className="text-3xl font-bold text-brand-purple mb-4">{service.price}</p>
@@ -151,13 +200,35 @@ const Services = () => {
 
                   {/* Hover Glow Effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-5`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5`} />
                   </div>
                 </Card>
               </motion.div>
             );
           })}
         </div>
+
+        {/* Animated Robot Section */}
+        <motion.div
+          className="mt-20 text-center"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <div className="flex flex-col items-center gap-8">
+            <div className="relative">
+              <AnimatedRobot />
+            </div>
+            <motion.p
+              className="text-lg text-muted-foreground max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.3 }}
+            >
+              Nuestro equipo de IA trabaja 24/7 para crear las mejores soluciones para tu negocio
+            </motion.p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

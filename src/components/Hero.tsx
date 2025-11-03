@@ -137,17 +137,62 @@ const Hero = () => {
 
               {/* Robot Working Animation */}
               <motion.div
-                className="absolute -top-8 -right-8"
+                className="absolute -top-12 -right-12"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
               >
                 <motion.div
-                  className="w-16 h-16 bg-gradient-to-br from-brand-purple to-brand-purple-dark rounded-lg flex items-center justify-center shadow-glow"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  className="relative"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Sparkles className="w-8 h-8 text-white" />
+                  {/* Robot Icon */}
+                  <div className="w-20 h-20 bg-gradient-to-br from-brand-purple to-brand-purple-dark rounded-2xl flex items-center justify-center shadow-glow relative">
+                    <Sparkles className="w-10 h-10 text-white" />
+                    
+                    {/* Working Indicator */}
+                    <motion.div
+                      className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        boxShadow: [
+                          "0 0 0 0 rgba(34, 197, 94, 0.7)",
+                          "0 0 0 10px rgba(34, 197, 94, 0)",
+                          "0 0 0 0 rgba(34, 197, 94, 0)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                      }}
+                    >
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </motion.div>
+                  </div>
+                  
+                  {/* Sparks Effect */}
+                  {[...Array(4)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1.5 h-1.5 bg-brand-purple-light rounded-full"
+                      style={{
+                        top: "50%",
+                        left: "50%",
+                      }}
+                      animate={{
+                        x: [0, Math.cos((i * Math.PI) / 2) * 30],
+                        y: [0, Math.sin((i * Math.PI) / 2) * 30],
+                        opacity: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                        ease: "easeOut",
+                      }}
+                    />
+                  ))}
                 </motion.div>
               </motion.div>
 

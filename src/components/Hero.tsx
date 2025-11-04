@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
-import logo from "@/assets/maylink-logo.png";
+import robotCityscape from "@/assets/robot-cityscape.jpg";
 import TypewriterText from "./TypewriterText";
-import RobotBuilder from "./RobotBuilder";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -116,129 +115,69 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Animated Logo with Robot Building */}
+          {/* Futuristic Robot Scene */}
           <motion.div
             className="flex-1 relative"
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative w-full max-w-lg mx-auto h-[500px]">
-              {/* Main Logo - being built */}
+            <div className="relative w-full max-w-2xl mx-auto">
+              {/* Main Robot Image */}
               <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                className="relative rounded-2xl overflow-hidden shadow-2xl"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               >
                 <img
-                  src={logo}
-                  alt="MayLink AI"
-                  className="w-80 h-80 relative z-10"
+                  src={robotCityscape}
+                  alt="Robot futurista observando ciudad"
+                  className="w-full h-auto"
                 />
-
-                {/* Logo Glow Effect */}
+                
+                {/* Overlay gradient for integration */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+                
+                {/* Glow effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-full blur-3xl bg-brand-purple/30"
+                  className="absolute inset-0 rounded-2xl"
                   animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.3, 0.6, 0.3],
+                    boxShadow: [
+                      "0 0 20px hsl(277 100% 62% / 0.3)",
+                      "0 0 60px hsl(277 100% 62% / 0.5)",
+                      "0 0 20px hsl(277 100% 62% / 0.3)",
+                    ],
                   }}
                   transition={{ duration: 3, repeat: Infinity }}
                 />
-
-                {/* Building Progress Overlay */}
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  initial={{ clipPath: "inset(100% 0 0 0)" }}
-                  animate={{ clipPath: "inset(0% 0 0 0)" }}
-                  transition={{ duration: 4, delay: 1 }}
-                >
-                  <img
-                    src={logo}
-                    alt="MayLink AI Building"
-                    className="w-80 h-80"
-                  />
-                </motion.div>
-
-                {/* Pulse Effect when complete */}
-                <motion.div
-                  className="absolute inset-0 rounded-full"
-                  initial={{ scale: 1, opacity: 0 }}
-                  animate={{
-                    scale: [1, 1.5, 2],
-                    opacity: [0, 0.5, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: 5,
-                  }}
-                  style={{
-                    background:
-                      "radial-gradient(circle, hsl(277 100% 62% / 0.4) 0%, transparent 70%)",
-                  }}
-                />
               </motion.div>
 
-              {/* Robot Builder Component */}
-              <RobotBuilder />
-
-              {/* Circuit Lines around Logo */}
-              <svg
-                className="absolute inset-0 w-full h-full"
-                style={{ zIndex: 5 }}
-              >
-                {[...Array(8)].map((_, i) => {
-                  const angle = (i * 360) / 8;
-                  const startRadius = 120;
-                  const endRadius = 200;
-                  const x1 = 250 + startRadius * Math.cos((angle * Math.PI) / 180);
-                  const y1 = 250 + startRadius * Math.sin((angle * Math.PI) / 180);
-                  const x2 = 250 + endRadius * Math.cos((angle * Math.PI) / 180);
-                  const y2 = 250 + endRadius * Math.sin((angle * Math.PI) / 180);
-
-                  return (
-                    <motion.line
-                      key={i}
-                      x1={x1}
-                      y1={y1}
-                      x2={x2}
-                      y2={y2}
-                      stroke="hsl(277 100% 62%)"
-                      strokeWidth="2"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: [0, 0.6, 0] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: 2 + i * 0.2,
-                      }}
-                    />
-                  );
-                })}
-              </svg>
-
-              {/* Floating Tech Elements */}
-              {[...Array(6)].map((_, i) => (
+              {/* Floating particles around image */}
+              {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-3 h-3 border-2 border-brand-purple"
+                  className="absolute w-2 h-2 bg-brand-purple rounded-full"
                   style={{
-                    top: `${20 + Math.random() * 60}%`,
-                    left: `${10 + Math.random() * 80}%`,
+                    top: `${10 + Math.random() * 80}%`,
+                    left: `${-5 + Math.random() * 110}%`,
                   }}
                   animate={{
-                    rotate: 360,
-                    y: [0, -30, 0],
-                    opacity: [0.3, 0.8, 0.3],
+                    y: [0, -20, 0],
+                    opacity: [0.2, 0.8, 0.2],
                   }}
                   transition={{
-                    duration: 4 + Math.random() * 2,
+                    duration: 3 + Math.random() * 2,
                     repeat: Infinity,
-                    delay: i * 0.5,
+                    delay: i * 0.3,
                   }}
                 />
               ))}
+
+              {/* Tech corners */}
+              <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-brand-purple" />
+              <div className="absolute -top-4 -right-4 w-12 h-12 border-t-2 border-r-2 border-brand-purple" />
+              <div className="absolute -bottom-4 -left-4 w-12 h-12 border-b-2 border-l-2 border-brand-purple" />
+              <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-brand-purple" />
             </div>
           </motion.div>
         </div>

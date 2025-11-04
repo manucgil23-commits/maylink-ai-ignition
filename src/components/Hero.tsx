@@ -115,7 +115,7 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Futuristic Robot Scene */}
+          {/* Futuristic Robot Scene - Seamlessly Integrated */}
           <motion.div
             className="flex-1 relative"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -123,61 +123,66 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="relative w-full max-w-2xl mx-auto">
-              {/* Main Robot Image */}
+              {/* Background glow effect */}
               <motion.div
-                className="relative rounded-2xl overflow-hidden shadow-2xl"
-                whileHover={{ scale: 1.02 }}
+                className="absolute inset-0 blur-3xl"
+                style={{
+                  background: "radial-gradient(circle at center, hsl(277 100% 62% / 0.3), transparent 70%)",
+                }}
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.4, 0.7, 0.4],
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              />
+
+              {/* Robot Image - seamlessly blended */}
+              <motion.div
+                className="relative"
+                whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
                 <img
                   src={robotCityscape}
                   alt="Robot futurista observando ciudad"
-                  className="w-full h-auto"
+                  className="w-full h-auto relative z-10 mix-blend-lighten opacity-90"
+                  style={{
+                    maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)",
+                    WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)",
+                  }}
                 />
                 
-                {/* Overlay gradient for integration */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
-                
-                {/* Glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl"
-                  animate={{
-                    boxShadow: [
-                      "0 0 20px hsl(277 100% 62% / 0.3)",
-                      "0 0 60px hsl(277 100% 62% / 0.5)",
-                      "0 0 20px hsl(277 100% 62% / 0.3)",
-                    ],
+                {/* Subtle overlay to blend colors */}
+                <div 
+                  className="absolute inset-0 z-20 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(135deg, hsl(277 100% 62% / 0.1) 0%, transparent 50%, hsl(0 0% 8% / 0.3) 100%)",
                   }}
-                  transition={{ duration: 3, repeat: Infinity }}
                 />
               </motion.div>
 
-              {/* Floating particles around image */}
-              {[...Array(8)].map((_, i) => (
+              {/* Enhanced floating particles */}
+              {[...Array(15)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-2 h-2 bg-brand-purple rounded-full"
+                  className="absolute w-2 h-2 bg-brand-purple rounded-full shadow-glow"
                   style={{
-                    top: `${10 + Math.random() * 80}%`,
-                    left: `${-5 + Math.random() * 110}%`,
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
                   }}
                   animate={{
-                    y: [0, -20, 0],
-                    opacity: [0.2, 0.8, 0.2],
+                    y: [0, -40, 0],
+                    x: [0, Math.random() * 30 - 15, 0],
+                    opacity: [0.3, 1, 0.3],
+                    scale: [0.8, 1.2, 0.8],
                   }}
                   transition={{
-                    duration: 3 + Math.random() * 2,
+                    duration: 3 + Math.random() * 3,
                     repeat: Infinity,
-                    delay: i * 0.3,
+                    delay: i * 0.2,
                   }}
                 />
               ))}
-
-              {/* Tech corners */}
-              <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-brand-purple" />
-              <div className="absolute -top-4 -right-4 w-12 h-12 border-t-2 border-r-2 border-brand-purple" />
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 border-b-2 border-l-2 border-brand-purple" />
-              <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-brand-purple" />
             </div>
           </motion.div>
         </div>

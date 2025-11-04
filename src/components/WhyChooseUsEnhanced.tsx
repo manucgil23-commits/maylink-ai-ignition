@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Lightbulb, Puzzle, Heart, TrendingUp, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import ConnectedParticles from "./ConnectedParticles";
 
 const reasons = [
   {
@@ -44,27 +45,9 @@ const WhyChooseUsEnhanced = () => {
     <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-secondary/20 to-background" />
       
-      {/* Animated Background Elements */}
+      {/* Connected Particles Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-brand-purple/30 rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 2, 1],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+        <ConnectedParticles />
       </div>
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>

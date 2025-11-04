@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import ConnectedParticles from "./ConnectedParticles";
 
 const testimonials = [
   {
@@ -64,6 +65,11 @@ const Testimonials = () => {
   return (
     <section id="resenas" className="py-20 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-background to-background" />
+
+      {/* Connected Particles Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <ConnectedParticles />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div

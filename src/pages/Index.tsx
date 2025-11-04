@@ -10,7 +10,6 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingBar from "@/components/FloatingBar";
-import CustomCursor from "@/components/CustomCursor";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +22,6 @@ const Index = () => {
 
       {!isLoading && (
         <>
-          <CustomCursor />
           <Header />
           <main>
             <Hero />

@@ -15,7 +15,7 @@ const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32"
     >
       {/* Full Background Robot Image */}
       <div className="absolute inset-0">
@@ -26,7 +26,8 @@ const Hero = () => {
         />
         {/* Gradient overlays for readability and integration */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
         <div className="absolute inset-0 bg-gradient-hero opacity-50" />
       </div>
 
@@ -88,7 +89,7 @@ const Hero = () => {
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
                 <TypewriterText 
                   text="posibilidades infinitas"
-                  delay={900}
+                  delay={500}
                 />
               </span>
             </motion.h1>

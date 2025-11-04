@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import WhyChooseUsEnhanced from "@/components/WhyChooseUsEnhanced";
 import Services3D from "@/components/Services3D";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingBar from "@/components/FloatingBar";
@@ -29,6 +30,7 @@ const Index = () => {
             <WhyChooseUsEnhanced />
             <Services3D />
             <Testimonials />
+            <FAQ />
             <Contact />
           </main>
           <Footer />

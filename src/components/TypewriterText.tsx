@@ -17,7 +17,7 @@ const TypewriterText = ({ text, delay = 0, className = "" }: TypewriterTextProps
         setDisplayedText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
       }
-    }, delay + 15);
+    }, delay + 30);
 
     return () => clearTimeout(timeout);
   }, [currentIndex, text, delay]);

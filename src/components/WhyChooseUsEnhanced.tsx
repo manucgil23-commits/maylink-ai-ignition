@@ -42,11 +42,11 @@ const WhyChooseUsEnhanced = () => {
 
   return (
     <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-secondary/20 to-background" />
       
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-brand-purple/30 rounded-full"

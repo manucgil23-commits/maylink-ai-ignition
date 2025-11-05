@@ -129,6 +129,16 @@ const Services3D = () => {
     return () => clearInterval(interval);
   }, [isAutoRotating]);
 
+  useEffect(() => {
+    if (isAutoRotating) return;
+    
+    const timer = setTimeout(() => {
+      setIsAutoRotating(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [isAutoRotating, currentIndex]);
+
   const scrollToContact = () => {
     const element = document.getElementById("contacto");
     if (element) {
@@ -251,10 +261,7 @@ const Services3D = () => {
                     </div>
 
                     <h3 className="text-xl font-bold mb-2 text-center">{service.title}</h3>
-                    <p className="text-2xl font-bold text-brand-purple mb-3 text-center">
-                      {service.price}
-                    </p>
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-center text-sm">
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-center text-sm mt-2">
                       {service.description}
                     </p>
 

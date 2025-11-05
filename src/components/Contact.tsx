@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
@@ -26,8 +28,8 @@ const Contact = () => {
     // Validation
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Error",
-        description: "Por favor, completa todos los campos",
+        title: t.contact.errorTitle,
+        description: t.contact.errorFields,
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -38,8 +40,8 @@ const Contact = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast({
-        title: "Error",
-        description: "Por favor, introduce un email válido",
+        title: t.contact.errorTitle,
+        description: t.contact.errorEmail,
         variant: "destructive",
       });
       setIsSubmitting(false);
@@ -50,8 +52,8 @@ const Contact = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     toast({
-      title: "¡Mensaje enviado!",
-      description: "Te responderemos en menos de 24 horas",
+      title: t.contact.successTitle,
+      description: t.contact.successDescription,
     });
 
     setFormData({ name: "", email: "", message: "" });
@@ -75,9 +77,9 @@ const Contact = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
           >
-            Hablemos de tu{" "}
+            {t.contact.title}
             <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-              proyecto
+              {t.contact.titleHighlight}
             </span>
           </motion.h2>
           <motion.p
@@ -86,7 +88,7 @@ const Contact = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            ¿Tienes un proyecto en mente? Cuéntanos sobre tu idea y te responderemos en menos de 24 horas
+            {t.contact.subtitle}
           </motion.p>
         </motion.div>
 
@@ -99,9 +101,9 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">Información de contacto</h3>
+              <h3 className="text-2xl font-bold mb-6">{t.contact.infoTitle}</h3>
               <p className="text-muted-foreground mb-8">
-                Estamos aquí para ayudarte a transformar tu negocio con IA. Contáctanos y descubre cómo podemos impulsar tu crecimiento.
+                {t.contact.infoDescription}
               </p>
             </div>
 
@@ -112,7 +114,7 @@ const Contact = () => {
                     <Mail className="w-6 h-6 text-brand-purple" />
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">Email</p>
+                    <p className="font-semibold mb-1">{t.contact.email}</p>
                     <a
                       href="mailto:hola@maylink.ai"
                       className="text-muted-foreground hover:text-brand-purple transition-colors"
@@ -129,7 +131,7 @@ const Contact = () => {
                     <Phone className="w-6 h-6 text-brand-purple" />
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">Teléfono</p>
+                    <p className="font-semibold mb-1">{t.contact.phone}</p>
                     <a
                       href="tel:+34123456789"
                       className="text-muted-foreground hover:text-brand-purple transition-colors"
@@ -146,8 +148,8 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-brand-purple" />
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">Ubicación</p>
-                    <p className="text-muted-foreground">Madrid, España</p>
+                    <p className="font-semibold mb-1">{t.contact.location}</p>
+                    <p className="text-muted-foreground">{t.contact.locationValue}</p>
                   </div>
                 </div>
               </Card>
@@ -155,9 +157,9 @@ const Contact = () => {
 
             <div className="p-6 bg-brand-purple/5 border border-brand-purple/20 rounded-lg">
               <CheckCircle className="w-8 h-8 text-brand-purple mb-3" />
-              <p className="font-semibold mb-2">Respuesta garantizada</p>
+              <p className="font-semibold mb-2">{t.contact.guaranteeTitle}</p>
               <p className="text-sm text-muted-foreground">
-                Nos comprometemos a responderte en menos de 24 horas laborables
+                {t.contact.guaranteeDescription}
               </p>
             </div>
           </motion.div>
@@ -172,14 +174,14 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Nombre completo *
+                    {t.contact.formName} *
                   </label>
                   <Input
                     id="name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Juan Pérez"
+                    placeholder={t.contact.formNamePlaceholder}
                     className="bg-background border-border focus:border-brand-purple"
                     required
                   />
@@ -187,14 +189,14 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email *
+                    {t.contact.formEmail} *
                   </label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="tu@email.com"
+                    placeholder={t.contact.formEmailPlaceholder}
                     className="bg-background border-border focus:border-brand-purple"
                     required
                   />
@@ -202,13 +204,13 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Mensaje *
+                    {t.contact.formMessage} *
                   </label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Cuéntanos sobre tu proyecto..."
+                    placeholder={t.contact.formMessagePlaceholder}
                     className="bg-background border-border focus:border-brand-purple min-h-[150px]"
                     required
                   />
@@ -221,17 +223,17 @@ const Contact = () => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    <>Enviando...</>
+                    <>{t.contact.formSubmitting}</>
                   ) : (
                     <>
-                      Enviar mensaje
+                      {t.contact.formSubmit}
                       <Send className="ml-2 w-4 h-4" />
                     </>
                   )}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
-                  Al enviar este formulario, aceptas nuestra política de privacidad
+                  {t.contact.formPrivacy}
                 </p>
               </form>
             </Card>

@@ -7,6 +7,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { HelpCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import ConnectedParticles from "./ConnectedParticles";
 
 const faqs = [
@@ -28,11 +31,11 @@ const faqs = [
   },
   {
     question: "¿Qué tipo de soporte ofrecen después de la implementación?",
-    answer: "Ofrecemos soporte continuo 24/7 con respuesta garantizada en 3 días. Esto incluye mantenimiento, actualizaciones, resolución de problemas y mejoras incrementales. También proporcionamos informes mensuales de rendimiento y análisis de métricas."
+    answer: "Ofrecemos soporte continuo con respuesta garantizada. Esto incluye mantenimiento, actualizaciones, resolución de problemas y mejoras incrementales. También proporcionamos informes mensuales de rendimiento y análisis de métricas."
   },
   {
     question: "¿Cuál es el coste aproximado de una automatización?",
-    answer: "El coste varía según la complejidad y alcance del proyecto. Ofrecemos presupuestos personalizados sin compromiso después de entender tus necesidades específicas. Agenda una consulta gratuita para conocer más detalles."
+    answer: "Cada proyecto es único y adaptamos nuestros precios según tus necesidades específicas. Ofrecemos presupuestos personalizados sin compromiso después de una consulta inicial donde entendemos el alcance y complejidad de tu proyecto."
   },
   {
     question: "¿Las soluciones se integran con mis sistemas actuales?",
@@ -45,8 +48,16 @@ const faqs = [
 ];
 
 const FAQ = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const scrollToContact = () => {
+    const element = document.getElementById("contacto");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="faq" className="py-20 md:py-32 relative overflow-hidden">
@@ -70,8 +81,9 @@ const FAQ = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
           >
+            {t.faq.title}
             <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-              Preguntas Frecuentes
+              {t.faq.titleHighlight}
             </span>
           </motion.h2>
           <motion.p
@@ -80,7 +92,7 @@ const FAQ = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            Resolvemos tus dudas sobre nuestros servicios y procesos
+            {t.faq.subtitle}
           </motion.p>
         </motion.div>
 
@@ -118,25 +130,27 @@ const FAQ = () => {
 
         {/* CTA Section */}
         <motion.div
-          className="text-center mt-16"
+          className="mt-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 0.6 }}
         >
-          <p className="text-lg text-muted-foreground mb-4">
-            ¿Tienes más preguntas?
-          </p>
-          <motion.button
-            onClick={() => {
-              const element = document.getElementById("contacto");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-8 py-3 bg-brand-purple hover:bg-brand-purple-dark text-white rounded-lg font-semibold transition-all shadow-purple"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contáctanos
-          </motion.button>
+          <div className="bg-gradient-card p-8 rounded-2xl border border-border max-w-2xl mx-auto relative overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+              <ConnectedParticles />
+            </div>
+            <HelpCircle className="w-12 h-12 text-brand-purple mx-auto mb-4 relative z-10" />
+            <h3 className="text-2xl font-bold mb-2 relative z-10">{t.faq.moreQuestions}</h3>
+            <p className="text-muted-foreground mb-6 relative z-10">
+              {t.faq.contactUs}
+            </p>
+            <Button
+              onClick={scrollToContact}
+              className="bg-brand-purple hover:bg-brand-purple-dark relative z-10"
+            >
+              {t.faq.contactButton}
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -27,10 +27,10 @@ const Header = () => {
   };
 
   const menuItems = [
-    { label: t('inicio'), id: "inicio" },
-    { label: t('servicios'), id: "servicios" },
-    { label: t('porQueElegirnos'), id: "por-que-elegirnos" },
-    { label: t('resenas'), id: "resenas" },
+    { label: t.nav.inicio, id: "inicio" },
+    { label: t.nav.servicios, id: "servicios" },
+    { label: t.nav.porQueElegirnos, id: "por-que-elegirnos" },
+    { label: t.nav.faq, id: "faq" },
   ];
 
   return (
@@ -87,7 +87,7 @@ const Header = () => {
             onClick={() => scrollToSection("contacto")}
             className="bg-brand-purple hover:bg-brand-purple-dark transition-all shadow-glow"
           >
-            {t('contactanos')}
+            {t.nav.contacto}
           </Button>
         </div>
 
@@ -134,7 +134,7 @@ const Header = () => {
               onClick={() => scrollToSection("contacto")}
               className="bg-brand-purple hover:bg-brand-purple-dark w-full"
             >
-              {t('contactanos')}
+              {t.nav.contacto}
             </Button>
           </div>
         </motion.div>

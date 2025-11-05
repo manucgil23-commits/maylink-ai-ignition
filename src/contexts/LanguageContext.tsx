@@ -2,262 +2,226 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'es' | 'en';
 
+type TranslationObject = Record<string, any>;
+
 interface LanguageContextType {
   language: Language;
   toggleLanguage: () => void;
-  t: (key: string) => string;
+  t: TranslationObject;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const translations = {
   es: {
-    // Header
-    inicio: "Inicio",
-    servicios: "Servicios",
-    porQueElegirnos: "Por qué elegirnos",
-    resenas: "Reseñas",
-    contacto: "Contacto",
-    contactanos: "Contáctanos",
-    
-    // Hero
-    heroTitle: "Transforma tu negocio con",
-    heroTitleHighlight: "Inteligencia Artificial",
-    heroSubtitle: "Creamos soluciones digitales innovadoras que impulsan el crecimiento de tu empresa. Automatización, desarrollo web y chatbots inteligentes al alcance de tu mano.",
-    empezar: "Empezar ahora",
-    
-    // Services
-    nuestrosServicios: "Nuestros Servicios",
-    serviciosSubtitle: "Elige el pack perfecto para impulsar tu transformación digital",
-    consultar: "Consultar",
-    solicitarInfo: "Solicitar info",
-    
-    // Web Express
-    webExpressTitle: "Web Express",
-    webExpressDesc: "Páginas web profesionales, rápidas y modernas que convierten visitantes en clientes.",
-    webExpressFeature1: "Diseño responsive y moderno",
-    webExpressFeature2: "Optimización SEO básica",
-    webExpressFeature3: "Integración con redes sociales",
-    webExpressFeature4: "Panel de administración",
-    
-    // IA Interactiva
-    iaInteractivaTitle: "IA Interactiva",
-    iaInteractivaDesc: "Chatbots inteligentes y automatizaciones que atienden a tus clientes 24/7.",
-    iaInteractivaFeature1: "Chatbot con IA conversacional",
-    iaInteractivaFeature2: "Automatización de citas y reservas",
-    iaInteractivaFeature3: "Respuestas personalizadas",
-    iaInteractivaFeature4: "Integración con WhatsApp",
-    
-    // Solución a medida
-    solucionMedidaTitle: "Solución a medida",
-    solucionMedidaDesc: "Automatizaciones avanzadas totalmente personalizadas para desafíos únicos.",
-    solucionMedidaFeature1: "Análisis personalizado de necesidades",
-    solucionMedidaFeature2: "Desarrollo a medida",
-    solucionMedidaFeature3: "Integración con sistemas existentes",
-    solucionMedidaFeature4: "Soporte prioritario continuo",
-    
-    // Automatización Empresarial
-    automatizacionTitle: "Automatización Empresarial",
-    automatizacionDesc: "Optimiza los procesos internos de tu negocio con flujos de trabajo inteligentes y eficientes.",
-    automatizacionFeature1: "Integración entre aplicaciones y plataformas",
-    automatizacionFeature2: "Reducción de tareas manuales",
-    automatizacionFeature3: "Flujos automatizados personalizables",
-    automatizacionFeature4: "Ahorro de tiempo y recursos",
-    
-    // Asistente Virtual
-    asistenteTitle: "Asistente Virtual IA",
-    asistenteDesc: "Asistentes virtuales diseñados para atender, informar y acompañar a tus clientes en tiempo real.",
-    asistenteFeature1: "Respuestas automáticas personalizadas",
-    asistenteFeature2: "Atención multicanal (web, WhatsApp, email)",
-    asistenteFeature3: "Gestión de citas y consultas",
-    asistenteFeature4: "Disponibilidad 24/7 con IA avanzada",
-    
-    // Why Choose Us
-    porQueTitle: "¿Por qué elegir",
-    porQueTitleHighlight: "MayLink AI?",
-    porQueSubtitle: "Transformamos ideas en soluciones digitales que generan resultados reales",
-    
-    innovacionTitle: "Innovación Constante",
-    innovacionDesc: "Utilizamos las últimas tecnologías en IA y desarrollo web para crear soluciones que marcan la diferencia.",
-    innovacionDetail: "Nos mantenemos a la vanguardia de las tecnologías emergentes, implementando soluciones de IA generativa, automatización inteligente y desarrollo web moderno que transforman la manera en que las empresas operan y se relacionan con sus clientes.",
-    
-    personalizacionTitle: "Personalización Total",
-    personalizacionDesc: "Cada proyecto es único. Adaptamos nuestras soluciones a las necesidades específicas de tu negocio.",
-    personalizacionDetail: "Entendemos que cada negocio tiene desafíos únicos. Por eso, realizamos un análisis profundo de tus necesidades para diseñar soluciones a medida que se integran perfectamente con tus procesos existentes y objetivos de crecimiento.",
-    
-    soporteTitle: "Soporte Continuo",
-    soporteDesc: "No te dejamos solo después del lanzamiento. Estamos contigo en cada paso del camino.",
-    soporteDetail: "Nuestro compromiso no termina con la entrega del proyecto. Ofrecemos soporte técnico continuo, actualizaciones regulares y mantenimiento proactivo para asegurar que tu solución digital siempre funcione de manera óptima y evolucione con tu negocio.",
-    
-    resultadosTitle: "Resultados Medibles",
-    resultadosDesc: "Nos enfocamos en entregar soluciones que generen un impacto real y cuantificable en tu negocio.",
-    resultadosDetail: "Implementamos métricas claras y sistemas de análisis que te permiten medir el ROI de tu inversión. Desde el aumento en conversiones hasta la reducción de costos operativos, cada solución está diseñada para generar resultados tangibles y medibles.",
-    
-    verMas: "Ver más",
-    verMenos: "Ver menos",
-    
-    // Testimonials
-    testimoniosTitle: "Lo que dicen nuestros",
-    testimoniosTitleHighlight: "clientes",
-    
-    // Contact
-    contactoTitle: "¿Listo para transformar tu negocio?",
-    contactoSubtitle: "Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte a alcanzar tus objetivos",
-    nombreLabel: "Nombre",
-    nombrePlaceholder: "Tu nombre completo",
-    emailLabel: "Email",
-    emailPlaceholder: "tu@email.com",
-    mensajeLabel: "Mensaje",
-    mensajePlaceholder: "Cuéntanos sobre tu proyecto...",
-    enviar: "Enviar mensaje",
-    
-    // FAQ
-    faqTitle: "Preguntas",
-    faqTitleHighlight: "Frecuentes",
-    
-    faqQuestion1: "¿Cuánto tiempo toma desarrollar un proyecto?",
-    faqAnswer1: "El tiempo de desarrollo varía según la complejidad del proyecto. Un sitio web básico puede estar listo en 2-3 semanas, mientras que soluciones más complejas con IA pueden tomar de 1 a 3 meses. Siempre establecemos plazos claros desde el inicio.",
-    
-    faqQuestion2: "¿Ofrecen soporte después del lanzamiento?",
-    faqAnswer2: "Sí, ofrecemos diferentes planes de soporte y mantenimiento. Incluimos un período inicial de soporte gratuito y luego puedes elegir el plan que mejor se adapte a tus necesidades de actualización y mantenimiento continuo.",
-    
-    faqQuestion3: "¿Cuál es el costo aproximado de una automatización?",
-    faqAnswer3: "El costo varía según la complejidad y alcance del proyecto. Ofrecemos presupuestos personalizados sin compromiso después de entender tus necesidades específicas. Agenda una consulta gratuita para conocer más detalles.",
-    
-    faqQuestion4: "¿Necesito conocimientos técnicos para usar sus soluciones?",
-    faqAnswer4: "No, diseñamos todas nuestras soluciones para que sean intuitivas y fáciles de usar. Además, proporcionamos capacitación completa y documentación detallada para que tú y tu equipo puedan aprovechar al máximo las herramientas.",
-    
-    // Footer
-    footerDesc: "Transformamos ideas en soluciones digitales innovadoras con el poder de la inteligencia artificial.",
-    footerEnlaces: "Enlaces",
-    footerContactoTitle: "Contacto",
-    footerEmail: "info@maylink.ai",
-    footerTelefono: "+34 123 456 789",
-    footerDerechos: "Todos los derechos reservados.",
+    nav: {
+      inicio: "Inicio",
+      servicios: "Servicios",
+      porQueElegirnos: "Por qué elegirnos",
+      resenas: "Reseñas",
+      faq: "FAQ",
+      contacto: "Contáctanos",
+    },
+    hero: {
+      badge: "Innovación en Automatización",
+      title: "Conectando ",
+      titleHighlight: "posibilidades infinitas",
+      description: "Creamos automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro. Soluciones personalizadas que transforman ideas en realidad.",
+      cta1: "Explorar servicios",
+      cta2: "Solicitar presupuesto",
+    },
+    whyChooseUs: {
+      title: "Por qué elegir ",
+      titleHighlight: "MayLink AI",
+      subtitle: "La combinación perfecta entre experiencia técnica e innovación constante",
+      cards: [
+        {
+          title: "Experiencia comprobada",
+          description: "Más de 50 proyectos de automatización exitosos para empresas de todos los tamaños.",
+          detail: "Hemos trabajado con startups, pymes y grandes empresas, entregando soluciones que realmente transforman la manera de hacer negocios.",
+        },
+        {
+          title: "Tecnología de vanguardia",
+          description: "Utilizamos las últimas herramientas de IA para crear soluciones robustas y escalables.",
+          detail: "Nos mantenemos actualizados con las tecnologías más avanzadas para asegurar que tu solución sea futura-proof.",
+        },
+        {
+          title: "Soporte continuo",
+          description: "Acompañamos tu proyecto desde la idea inicial hasta su evolución futura.",
+          detail: "No te dejamos solo después del lanzamiento. Estamos contigo para actualizaciones, mejoras y cualquier necesidad que surja.",
+        },
+        {
+          title: "Resultados medibles",
+          description: "Cada proyecto incluye métricas claras para que veas el impacto real en tu negocio.",
+          detail: "Implementamos sistemas de análisis que te permiten medir el ROI y el impacto de cada solución implementada.",
+        },
+      ],
+      readMore: "Leer más",
+      readLess: "Leer menos",
+    },
+    services: {
+      title: "Nuestros ",
+      titleHighlight: "Servicios",
+      subtitle: "Elige el pack perfecto para impulsar tu transformación digital",
+      requestInfo: "Solicitar info",
+    },
+    testimonials: {
+      title: "Lo que dicen ",
+      titleHighlight: "nuestros clientes",
+      subtitle: "Resultados reales de empresas que confiaron en nosotros",
+    },
+    faq: {
+      title: "Preguntas ",
+      titleHighlight: "frecuentes",
+      subtitle: "Resolvemos tus dudas más comunes sobre nuestros servicios",
+      moreQuestions: "¿Tienes más preguntas?",
+      contactUs: "Contáctanos y te responderemos enseguida",
+      contactButton: "Ir a contacto",
+    },
+    contact: {
+      title: "Hablemos de tu ",
+      titleHighlight: "proyecto",
+      subtitle: "¿Tienes un proyecto en mente? Cuéntanos sobre tu idea y te responderemos en menos de 24 horas",
+      infoTitle: "Información de contacto",
+      infoDescription: "Estamos aquí para ayudarte a transformar tu negocio con IA. Contáctanos y descubre cómo podemos impulsar tu crecimiento.",
+      email: "Email",
+      phone: "Teléfono",
+      location: "Ubicación",
+      locationValue: "Madrid, España",
+      guaranteeTitle: "Respuesta garantizada",
+      guaranteeDescription: "Nos comprometemos a responderte en menos de 24 horas laborables",
+      formName: "Nombre completo",
+      formEmail: "Email",
+      formMessage: "Mensaje",
+      formNamePlaceholder: "Juan Pérez",
+      formEmailPlaceholder: "tu@email.com",
+      formMessagePlaceholder: "Cuéntanos sobre tu proyecto...",
+      formSubmit: "Enviar mensaje",
+      formSubmitting: "Enviando...",
+      formPrivacy: "Al enviar este formulario, aceptas nuestra política de privacidad",
+      errorTitle: "Error",
+      errorFields: "Por favor, completa todos los campos",
+      errorEmail: "Por favor, introduce un email válido",
+      successTitle: "¡Mensaje enviado!",
+      successDescription: "Te responderemos en menos de 24 horas",
+    },
+    footer: {
+      description: "Conectando posibilidades infinitas. Automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro.",
+      quickLinks: "Enlaces rápidos",
+      legal: "Legal",
+      privacy: "Política de privacidad",
+      terms: "Términos y condiciones",
+      legalNotice: "Aviso legal",
+      cookies: "Cookies",
+      copyright: "Todos los derechos reservados",
+      madeWith: "Hecho con",
+      madeIn: "en España",
+    },
   },
   en: {
-    // Header
-    inicio: "Home",
-    servicios: "Services",
-    porQueElegirnos: "Why Choose Us",
-    resenas: "Reviews",
-    contacto: "Contact",
-    contactanos: "Contact Us",
-    
-    // Hero
-    heroTitle: "Transform your business with",
-    heroTitleHighlight: "Artificial Intelligence",
-    heroSubtitle: "We create innovative digital solutions that drive your company's growth. Automation, web development, and intelligent chatbots at your fingertips.",
-    empezar: "Get Started",
-    
-    // Services
-    nuestrosServicios: "Our Services",
-    serviciosSubtitle: "Choose the perfect package to boost your digital transformation",
-    consultar: "Inquire",
-    solicitarInfo: "Request info",
-    
-    // Web Express
-    webExpressTitle: "Web Express",
-    webExpressDesc: "Professional, fast, and modern websites that convert visitors into customers.",
-    webExpressFeature1: "Responsive and modern design",
-    webExpressFeature2: "Basic SEO optimization",
-    webExpressFeature3: "Social media integration",
-    webExpressFeature4: "Admin panel",
-    
-    // IA Interactiva
-    iaInteractivaTitle: "Interactive AI",
-    iaInteractivaDesc: "Intelligent chatbots and automations that serve your customers 24/7.",
-    iaInteractivaFeature1: "Conversational AI chatbot",
-    iaInteractivaFeature2: "Appointment and booking automation",
-    iaInteractivaFeature3: "Personalized responses",
-    iaInteractivaFeature4: "WhatsApp integration",
-    
-    // Solución a medida
-    solucionMedidaTitle: "Custom Solution",
-    solucionMedidaDesc: "Advanced automations fully customized for unique challenges.",
-    solucionMedidaFeature1: "Personalized needs analysis",
-    solucionMedidaFeature2: "Custom development",
-    solucionMedidaFeature3: "Integration with existing systems",
-    solucionMedidaFeature4: "Priority ongoing support",
-    
-    // Automatización Empresarial
-    automatizacionTitle: "Business Automation",
-    automatizacionDesc: "Optimize your business internal processes with intelligent and efficient workflows.",
-    automatizacionFeature1: "Integration between applications and platforms",
-    automatizacionFeature2: "Reduction of manual tasks",
-    automatizacionFeature3: "Customizable automated flows",
-    automatizacionFeature4: "Time and resource savings",
-    
-    // Asistente Virtual
-    asistenteTitle: "AI Virtual Assistant",
-    asistenteDesc: "Virtual assistants designed to serve, inform, and accompany your customers in real-time.",
-    asistenteFeature1: "Personalized automatic responses",
-    asistenteFeature2: "Multi-channel support (web, WhatsApp, email)",
-    asistenteFeature3: "Appointment and inquiry management",
-    asistenteFeature4: "24/7 availability with advanced AI",
-    
-    // Why Choose Us
-    porQueTitle: "Why choose",
-    porQueTitleHighlight: "MayLink AI?",
-    porQueSubtitle: "We transform ideas into digital solutions that generate real results",
-    
-    innovacionTitle: "Constant Innovation",
-    innovacionDesc: "We use the latest AI and web development technologies to create solutions that make a difference.",
-    innovacionDetail: "We stay at the forefront of emerging technologies, implementing generative AI solutions, intelligent automation, and modern web development that transform how businesses operate and interact with their customers.",
-    
-    personalizacionTitle: "Total Customization",
-    personalizacionDesc: "Every project is unique. We adapt our solutions to your business's specific needs.",
-    personalizacionDetail: "We understand that every business has unique challenges. That's why we conduct a deep analysis of your needs to design custom solutions that integrate perfectly with your existing processes and growth objectives.",
-    
-    soporteTitle: "Ongoing Support",
-    soporteDesc: "We don't leave you alone after launch. We're with you every step of the way.",
-    soporteDetail: "Our commitment doesn't end with project delivery. We offer continuous technical support, regular updates, and proactive maintenance to ensure your digital solution always functions optimally and evolves with your business.",
-    
-    resultadosTitle: "Measurable Results",
-    resultadosDesc: "We focus on delivering solutions that generate real and quantifiable impact on your business.",
-    resultadosDetail: "We implement clear metrics and analysis systems that allow you to measure the ROI of your investment. From increased conversions to reduced operational costs, every solution is designed to generate tangible and measurable results.",
-    
-    verMas: "See more",
-    verMenos: "See less",
-    
-    // Testimonials
-    testimoniosTitle: "What our",
-    testimoniosTitleHighlight: "clients say",
-    
-    // Contact
-    contactoTitle: "Ready to transform your business?",
-    contactoSubtitle: "Tell us about your project and discover how we can help you achieve your goals",
-    nombreLabel: "Name",
-    nombrePlaceholder: "Your full name",
-    emailLabel: "Email",
-    emailPlaceholder: "your@email.com",
-    mensajeLabel: "Message",
-    mensajePlaceholder: "Tell us about your project...",
-    enviar: "Send message",
-    
-    // FAQ
-    faqTitle: "Frequently Asked",
-    faqTitleHighlight: "Questions",
-    
-    faqQuestion1: "How long does it take to develop a project?",
-    faqAnswer1: "Development time varies depending on project complexity. A basic website can be ready in 2-3 weeks, while more complex AI solutions can take 1 to 3 months. We always establish clear deadlines from the start.",
-    
-    faqQuestion2: "Do you offer support after launch?",
-    faqAnswer2: "Yes, we offer different support and maintenance plans. We include an initial free support period and then you can choose the plan that best suits your ongoing update and maintenance needs.",
-    
-    faqQuestion3: "What is the approximate cost of an automation?",
-    faqAnswer3: "The cost varies depending on the complexity and scope of the project. We offer personalized quotes without obligation after understanding your specific needs. Schedule a free consultation to learn more details.",
-    
-    faqQuestion4: "Do I need technical knowledge to use your solutions?",
-    faqAnswer4: "No, we design all our solutions to be intuitive and easy to use. Additionally, we provide complete training and detailed documentation so you and your team can make the most of the tools.",
-    
-    // Footer
-    footerDesc: "We transform ideas into innovative digital solutions with the power of artificial intelligence.",
-    footerEnlaces: "Links",
-    footerContactoTitle: "Contact",
-    footerEmail: "info@maylink.ai",
-    footerTelefono: "+34 123 456 789",
-    footerDerechos: "All rights reserved.",
+    nav: {
+      inicio: "Home",
+      servicios: "Services",
+      porQueElegirnos: "Why Choose Us",
+      resenas: "Reviews",
+      faq: "FAQ",
+      contacto: "Contact Us",
+    },
+    hero: {
+      badge: "Innovation in Automation",
+      title: "Connecting ",
+      titleHighlight: "infinite possibilities",
+      description: "We create AI-powered automations that drive your business into the future. Customized solutions that transform ideas into reality.",
+      cta1: "Explore services",
+      cta2: "Request quote",
+    },
+    whyChooseUs: {
+      title: "Why choose ",
+      titleHighlight: "MayLink AI",
+      subtitle: "The perfect combination of technical expertise and constant innovation",
+      cards: [
+        {
+          title: "Proven experience",
+          description: "Over 50 successful automation projects for businesses of all sizes.",
+          detail: "We have worked with startups, SMEs and large companies, delivering solutions that truly transform the way of doing business.",
+        },
+        {
+          title: "Cutting-edge technology",
+          description: "We use the latest AI tools to create robust and scalable solutions.",
+          detail: "We stay updated with the most advanced technologies to ensure your solution is future-proof.",
+        },
+        {
+          title: "Continuous support",
+          description: "We accompany your project from the initial idea to its future evolution.",
+          detail: "We don't leave you alone after launch. We are with you for updates, improvements and any needs that arise.",
+        },
+        {
+          title: "Measurable results",
+          description: "Each project includes clear metrics so you can see the real impact on your business.",
+          detail: "We implement analysis systems that allow you to measure the ROI and impact of each implemented solution.",
+        },
+      ],
+      readMore: "Read more",
+      readLess: "Read less",
+    },
+    services: {
+      title: "Our ",
+      titleHighlight: "Services",
+      subtitle: "Choose the perfect package to boost your digital transformation",
+      requestInfo: "Request info",
+    },
+    testimonials: {
+      title: "What our ",
+      titleHighlight: "customers say",
+      subtitle: "Real results from companies that trusted us",
+    },
+    faq: {
+      title: "Frequently ",
+      titleHighlight: "asked questions",
+      subtitle: "We answer your most common questions about our services",
+      moreQuestions: "Have more questions?",
+      contactUs: "Contact us and we'll answer you right away",
+      contactButton: "Go to contact",
+    },
+    contact: {
+      title: "Let's talk about your ",
+      titleHighlight: "project",
+      subtitle: "Have a project in mind? Tell us about your idea and we'll respond within 24 hours",
+      infoTitle: "Contact information",
+      infoDescription: "We're here to help you transform your business with AI. Contact us and discover how we can boost your growth.",
+      email: "Email",
+      phone: "Phone",
+      location: "Location",
+      locationValue: "Madrid, Spain",
+      guaranteeTitle: "Guaranteed response",
+      guaranteeDescription: "We commit to respond within 24 business hours",
+      formName: "Full name",
+      formEmail: "Email",
+      formMessage: "Message",
+      formNamePlaceholder: "John Doe",
+      formEmailPlaceholder: "your@email.com",
+      formMessagePlaceholder: "Tell us about your project...",
+      formSubmit: "Send message",
+      formSubmitting: "Sending...",
+      formPrivacy: "By submitting this form, you accept our privacy policy",
+      errorTitle: "Error",
+      errorFields: "Please fill in all fields",
+      errorEmail: "Please enter a valid email",
+      successTitle: "Message sent!",
+      successDescription: "We'll respond within 24 hours",
+    },
+    footer: {
+      description: "Connecting infinite possibilities. AI-powered automations that drive your business into the future.",
+      quickLinks: "Quick links",
+      legal: "Legal",
+      privacy: "Privacy policy",
+      terms: "Terms and conditions",
+      legalNotice: "Legal notice",
+      cookies: "Cookies",
+      copyright: "All rights reserved",
+      madeWith: "Made with",
+      madeIn: "in Spain",
+    },
   },
 };
 
@@ -268,9 +232,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     setLanguage(prev => prev === 'es' ? 'en' : 'es');
   };
 
-  const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations.es] || key;
-  };
+  const t = translations[language];
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>

@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Lightbulb, Puzzle, Heart, TrendingUp, ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import ConnectedParticles from "./ConnectedParticles";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const reasons = [
   {
@@ -37,6 +38,7 @@ const reasons = [
 ];
 
 const WhyChooseUsEnhanced = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
@@ -63,11 +65,10 @@ const WhyChooseUsEnhanced = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
           >
-            ¿Por qué elegir{" "}
+            {t.whyChooseUs.title}
             <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-              MayLink AI
+              {t.whyChooseUs.titleHighlight}
             </span>
-            ?
           </motion.h2>
           <motion.p
             className="text-lg text-muted-foreground max-w-2xl mx-auto"
@@ -75,12 +76,13 @@ const WhyChooseUsEnhanced = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            Más que tecnología, ofrecemos partnership estratégico para tu transformación digital
+            {t.whyChooseUs.subtitle}
           </motion.p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {reasons.map((reason, index) => {
+          {t.whyChooseUs.cards.map((card, index) => {
+            const reason = reasons[index];
             const Icon = reason.icon;
             const isExpanded = expandedCards.has(index);
             
@@ -167,10 +169,10 @@ const WhyChooseUsEnhanced = () => {
                   </motion.div>
 
                   <h3 className="text-xl font-semibold mb-3 group-hover:text-brand-purple transition-colors">
-                    {reason.title}
+                    {card.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed text-sm mb-4">
-                    {reason.description}
+                    {card.description}
                   </p>
 
                   <AnimatePresence>
@@ -183,7 +185,7 @@ const WhyChooseUsEnhanced = () => {
                       >
                         <div className="border-t border-border/50 pt-4 mt-2">
                           <p className="text-foreground leading-relaxed text-sm">
-                            {reason.expandedContent}
+                            {card.detail}
                           </p>
                         </div>
                       </motion.div>
@@ -202,7 +204,7 @@ const WhyChooseUsEnhanced = () => {
                       repeat: Infinity,
                     }}
                   >
-                    <span>{isExpanded ? "Ver menos" : "Ver más"}</span>
+                    <span>{isExpanded ? t.whyChooseUs.readLess : t.whyChooseUs.readMore}</span>
                     <motion.div
                       animate={{ rotate: isExpanded ? 180 : 0 }}
                       transition={{ duration: 0.3 }}

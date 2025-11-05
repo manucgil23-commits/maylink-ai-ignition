@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import robotCityscape from "@/assets/robot-cityscape.jpg";
 import TypewriterText from "./TypewriterText";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -71,7 +74,7 @@ const Hero = () => {
             >
               <Sparkles className="w-4 h-4 text-brand-purple" />
               <span className="text-sm text-brand-purple-light">
-                Innovación en Automatización
+                {t.hero.badge}
               </span>
             </motion.div>
 
@@ -82,13 +85,13 @@ const Hero = () => {
               transition={{ delay: 0.3 }}
             >
               <TypewriterText 
-                text="Conectando con "
-                delay={300}
+                text={t.hero.title}
+                delay={100}
               />
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
                 <TypewriterText 
-                  text="posibilidades infinitas"
-                  delay={500}
+                  text={t.hero.titleHighlight}
+                  delay={200}
                 />
               </span>
             </motion.h1>
@@ -99,8 +102,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Creamos automatizaciones con inteligencia artificial que impulsan tu negocio
-              hacia el futuro. Soluciones personalizadas que transforman ideas en realidad.
+              {t.hero.description}
             </motion.p>
 
             <motion.div
@@ -114,7 +116,7 @@ const Hero = () => {
                 onClick={() => scrollToSection("servicios")}
                 className="bg-brand-purple hover:bg-brand-purple-dark text-white shadow-purple group"
               >
-                Explorar servicios
+                {t.hero.cta1}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -123,7 +125,7 @@ const Hero = () => {
                 onClick={() => scrollToSection("contacto")}
                 className="border-brand-purple text-brand-purple hover:bg-brand-purple/10"
               >
-                Solicitar presupuesto
+                {t.hero.cta2}
               </Button>
             </motion.div>
           </motion.div>

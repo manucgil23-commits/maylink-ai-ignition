@@ -48,8 +48,8 @@ const Header = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img src={logo} alt="MayLink AI" className="w-10 h-10" />
-          <span className="text-xl font-bold">
+          <img src={logo} alt="MayLink AI" className="w-16 h-16" />
+          <span className="text-2xl font-bold">
             May<span className="text-brand-purple">Link</span> AI
           </span>
         </motion.div>

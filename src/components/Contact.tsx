@@ -86,7 +86,7 @@ const Contact = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            Te garantizamos un presupuesto en menos de 3 días
+            ¿Tienes un proyecto en mente? Cuéntanos sobre tu idea y te responderemos en menos de 24 horas
           </motion.p>
         </motion.div>
 

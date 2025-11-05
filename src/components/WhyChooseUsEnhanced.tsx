@@ -92,7 +92,7 @@ const WhyChooseUsEnhanced = () => {
                 transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
               >
                 <Card
-                  className={`h-full p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden ${
+                  className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden ${
                     isExpanded ? "lg:col-span-2 border-brand-purple shadow-purple" : ""
                   }`}
                   onClick={() => setExpandedCard(isExpanded ? null : index)}

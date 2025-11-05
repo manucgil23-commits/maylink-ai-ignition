@@ -10,7 +10,7 @@ const services = [
   {
     icon: Code2,
     title: "Web Express",
-    price: "desde 300 €",
+    price: "Consultar",
     description: "Páginas web profesionales, rápidas y modernas que convierten visitantes en clientes.",
     features: [
       "Diseño responsive y moderno",
@@ -24,7 +24,7 @@ const services = [
   {
     icon: MessageSquareCode,
     title: "IA Interactiva",
-    price: "desde 600 €",
+    price: "Consultar",
     description: "Chatbots inteligentes y automatizaciones que atienden a tus clientes 24/7.",
     features: [
       "Chatbot con IA conversacional",
@@ -39,7 +39,7 @@ const services = [
   {
     icon: Settings2,
     title: "Solución a medida",
-    price: "consultar",
+    price: "Consultar",
     description: "Automatizaciones avanzadas totalmente personalizadas para desafíos únicos.",
     features: [
       "Análisis personalizado de necesidades",
@@ -140,6 +140,13 @@ const Services3D = () => {
                     perspective: 1000,
                     transformStyle: "preserve-3d",
                   }}
+                  onClick={() => {
+                    if (absOffset !== 0) {
+                      setCurrentIndex(index);
+                    } else {
+                      setSelectedService(index);
+                    }
+                  }}
                 >
                   <Card
                     className={`w-[350px] h-[480px] p-8 bg-gradient-card border-border transition-all duration-500 cursor-pointer ${
@@ -147,7 +154,6 @@ const Services3D = () => {
                         ? "border-brand-purple shadow-purple"
                         : "border-border/50"
                     } ${service.featured && absOffset === 0 ? "ring-2 ring-brand-purple" : ""}`}
-                    onClick={() => absOffset === 0 && setSelectedService(index)}
                   >
                     {service.featured && absOffset === 0 && (
                       <div className="absolute top-4 right-4 bg-brand-purple text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -252,24 +258,20 @@ const Services3D = () => {
             })}
           </div>
 
-          {/* Navigation */}
-          <div className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 flex gap-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevService}
-              className="border-brand-purple hover:bg-brand-purple/10"
-            >
-              ←
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={nextService}
-              className="border-brand-purple hover:bg-brand-purple/10"
-            >
-              →
-            </Button>
+          {/* Navigation dots */}
+          <div className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 flex gap-3">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  index === currentIndex
+                    ? "bg-brand-purple scale-125"
+                    : "bg-border hover:bg-brand-purple/50"
+                }`}
+                aria-label={`Ir al servicio ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
 

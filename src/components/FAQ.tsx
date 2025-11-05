@@ -12,41 +12,6 @@ import { HelpCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ConnectedParticles from "./ConnectedParticles";
 
-const faqs = [
-  {
-    question: "¿Qué tipo de automatizaciones pueden crear?",
-    answer: "Creamos automatizaciones personalizadas con IA para una amplia variedad de procesos: chatbots inteligentes, automatización de atención al cliente, análisis de datos, procesamiento de documentos, integración de sistemas, y mucho más. Cada solución se adapta específicamente a las necesidades de tu negocio."
-  },
-  {
-    question: "¿Cuánto tiempo tarda en implementarse una solución?",
-    answer: "El tiempo varía según la complejidad del proyecto. Proyectos simples pueden estar listos en 1-2 semanas, mientras que soluciones más complejas pueden tomar 4-8 semanas. Siempre ofrecemos un cronograma detallado después de la consulta inicial."
-  },
-  {
-    question: "¿Necesito conocimientos técnicos para usar las automatizaciones?",
-    answer: "No. Diseñamos todas nuestras soluciones para que sean intuitivas y fáciles de usar. Además, proporcionamos capacitación completa a tu equipo y documentación detallada. Nuestro soporte está disponible siempre que lo necesites."
-  },
-  {
-    question: "¿Cómo funciona el proceso de trabajo?",
-    answer: "Comenzamos con una consulta gratuita para entender tus necesidades. Luego creamos una propuesta personalizada con presupuesto y cronograma. Una vez aprobado, desarrollamos la solución en sprints iterativos con tu feedback continuo. Finalmente, implementamos, capacitamos y ofrecemos soporte continuo."
-  },
-  {
-    question: "¿Qué tipo de soporte ofrecen después de la implementación?",
-    answer: "Ofrecemos soporte continuo con respuesta garantizada. Esto incluye mantenimiento, actualizaciones, resolución de problemas y mejoras incrementales. También proporcionamos informes mensuales de rendimiento y análisis de métricas."
-  },
-  {
-    question: "¿Cuál es el coste aproximado de una automatización?",
-    answer: "Cada proyecto es único y adaptamos nuestros precios según tus necesidades específicas. Ofrecemos presupuestos personalizados sin compromiso después de una consulta inicial donde entendemos el alcance y complejidad de tu proyecto."
-  },
-  {
-    question: "¿Las soluciones se integran con mis sistemas actuales?",
-    answer: "Sí, diseñamos nuestras automatizaciones para integrarse perfectamente con tus sistemas existentes: CRM, ERP, bases de datos, APIs, aplicaciones web y móviles. Trabajamos con las tecnologías más populares y podemos adaptarnos a infraestructuras personalizadas."
-  },
-  {
-    question: "¿Cómo garantizan la seguridad de los datos?",
-    answer: "La seguridad es nuestra prioridad. Implementamos encriptación end-to-end, cumplimos con RGPD y otras normativas de protección de datos, realizamos auditorías de seguridad regulares y seguimos las mejores prácticas de la industria. Todos los datos se almacenan en servidores seguros con copias de seguridad automáticas."
-  }
-];
-
 const FAQ = () => {
   const { t } = useLanguage();
   const ref = useRef(null);
@@ -103,7 +68,7 @@ const FAQ = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
+            {t.faq.questions.map((faq, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}

@@ -5,54 +5,19 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
-
-const testimonials = [
-  {
-    name: "Carlos Méndez",
-    company: "PymeTech Solutions",
-    role: "Director General",
-    text: "Gracias a MayLink AI, nuestra web ahora responde automáticamente a los clientes. La eficiencia ha aumentado un 300% y nuestros clientes están encantados.",
-    rating: 5,
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
-  },
-  {
-    name: "Laura Ríos",
-    company: "EstudioNova",
-    role: "Fundadora",
-    text: "Automatizamos nuestras reservas con IA y el cambio fue increíble. Ya no perdemos ninguna cita y podemos enfocarnos en lo que realmente importa: nuestros clientes.",
-    rating: 5,
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Laura",
-  },
-  {
-    name: "Miguel Torres",
-    company: "Digital Ventures",
-    role: "CEO",
-    text: "El equipo de MayLink AI transformó nuestra atención al cliente. El chatbot responde con precisión y la integración fue perfecta. Totalmente recomendable.",
-    rating: 5,
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Miguel",
-  },
-  {
-    name: "Ana Martínez",
-    company: "Consultora Horizonte",
-    role: "Directora de Operaciones",
-    text: "Profesionales de primer nivel. Entendieron perfectamente nuestras necesidades y crearon una solución que superó nuestras expectativas.",
-    rating: 5,
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana",
-  },
-  {
-    name: "David Sánchez",
-    company: "TechStart",
-    role: "CTO",
-    text: "La automatización que implementaron nos ha ahorrado más de 20 horas semanales. La inversión se pagó sola en menos de dos meses.",
-    rating: 5,
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Testimonials = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const testimonials = t.testimonials.items.map((item, index) => ({
+    ...item,
+    rating: 5,
+    image: `https://api.dicebear.com/7.x/avataaars/svg?seed=${item.name}`,
+  }));
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -83,20 +48,20 @@ const Testimonials = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2 }}
-          >
-            Lo que dicen{" "}
-            <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-              nuestros clientes
-            </span>
-          </motion.h2>
-          <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3 }}
-          >
-            Resultados reales de empresas que confiaron en nosotros
-          </motion.p>
+            >
+              {t.testimonials.title}
+              <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
+                {t.testimonials.titleHighlight}
+              </span>
+            </motion.h2>
+            <motion.p
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.3 }}
+            >
+              {t.testimonials.subtitle}
+            </motion.p>
         </motion.div>
 
         <div className="max-w-5xl mx-auto">

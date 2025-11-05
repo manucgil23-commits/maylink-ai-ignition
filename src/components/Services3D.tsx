@@ -5,6 +5,7 @@ import { Code2, MessageSquareCode, Settings2, ArrowRight, Check } from "lucide-r
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   {
@@ -114,6 +115,7 @@ const IconParticles = ({ gradient }: { gradient: string }) => {
 };
 
 const Services3D = () => {
+  const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(2);
@@ -161,26 +163,26 @@ const Services3D = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
           >
-            Nuestros{" "}
-            <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
-              Servicios
-            </span>
-          </motion.h2>
-          <motion.p
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3 }}
-          >
-            Elige el pack perfecto para impulsar tu transformación digital
-          </motion.p>
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 }}
+            >
+              {t.services.title}
+              <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
+                {t.services.titleHighlight}
+              </span>
+            </motion.h2>
+            <motion.p
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.3 }}
+            >
+              {t.services.subtitle}
+            </motion.p>
         </motion.div>
 
         {/* Carousel 3D */}
@@ -260,13 +262,16 @@ const Services3D = () => {
                       </motion.div>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-2 text-center">{service.title}</h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-center text-sm mt-2">
-                      {service.description}
+                    <h3 className="text-xl font-bold mb-2 text-center">{t.services.packs[index].title}</h3>
+                    <div className="text-center mb-2">
+                      <span className="text-lg font-semibold text-brand-purple">{t.services.price}</span>
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-center text-sm">
+                      {t.services.packs[index].description}
                     </p>
 
                     <ul className="space-y-2 mb-4">
-                      {service.features.map((feature, i) => (
+                      {t.services.packs[index].features.map((feature, i) => (
                         <motion.li
                           key={i}
                           className="flex items-start gap-2 text-xs"
@@ -288,7 +293,7 @@ const Services3D = () => {
                         }}
                         className="w-full bg-brand-purple hover:bg-brand-purple-dark mt-4"
                       >
-                        Solicitar info
+                        {t.services.requestInfo}
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
                     )}
@@ -299,7 +304,7 @@ const Services3D = () => {
           </div>
 
           {/* Navigation dots */}
-          <div className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 flex gap-3">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
             {services.map((_, index) => (
               <motion.button
                 key={index}

@@ -128,6 +128,31 @@ const Hero = () => {
                 {t.hero.cta2}
               </Button>
             </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto lg:mx-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="text-center lg:text-left">
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">50+</div>
+                <div className="text-sm text-foreground/80">{t.hero.stats.projects}</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">98%</div>
+                <div className="text-sm text-foreground/80">{t.hero.stats.satisfaction}</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">24/7</div>
+                <div className="text-sm text-foreground/80">{t.hero.stats.support}</div>
+              </div>
+              <div className="text-center lg:text-left">
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">3 días</div>
+                <div className="text-sm text-foreground/80">{t.hero.stats.response}</div>
+              </div>
+            </motion.div>
           </motion.div>
 
         </div>

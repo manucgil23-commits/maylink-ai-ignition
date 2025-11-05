@@ -75,6 +75,44 @@ const services = [
   },
 ];
 
+// Particles for icon animation
+const IconParticles = ({ gradient }: { gradient: string }) => {
+  return (
+    <div className="absolute inset-0 overflow-hidden rounded-2xl">
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={i}
+          className={`absolute w-1 h-1 rounded-full bg-gradient-to-r ${gradient}`}
+          initial={{
+            x: Math.random() * 64,
+            y: Math.random() * 64,
+            opacity: 0,
+          }}
+          animate={{
+            x: [
+              Math.random() * 64,
+              Math.random() * 64,
+              Math.random() * 64,
+            ],
+            y: [
+              Math.random() * 64,
+              Math.random() * 64,
+              Math.random() * 64,
+            ],
+            opacity: [0, 0.6, 0],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 2,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const Services3D = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -139,7 +177,11 @@ const Services3D = () => {
         <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
           <div className="relative w-full max-w-7xl">
             {services.map((service, index) => {
-              const offset = index - currentIndex;
+              // Calculate circular offset
+              let offset = index - currentIndex;
+              if (offset > services.length / 2) offset -= services.length;
+              if (offset < -services.length / 2) offset += services.length;
+              
               const absOffset = Math.abs(offset);
               const Icon = service.icon;
               
@@ -184,6 +226,7 @@ const Services3D = () => {
                     )}
 
                     <div className="relative w-16 h-16 mx-auto mb-4">
+                      <IconParticles gradient={service.gradient} />
                       <motion.div
                         className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center`}
                         animate={
@@ -203,7 +246,7 @@ const Services3D = () => {
                           ease: "easeInOut",
                         }}
                       >
-                        <Icon className="w-8 h-8 text-white" strokeWidth={1.5} />
+                        <Icon className="w-8 h-8 text-white relative z-10" strokeWidth={1.5} />
                       </motion.div>
                     </div>
 
@@ -251,14 +294,19 @@ const Services3D = () => {
           {/* Navigation dots */}
           <div className="absolute bottom-[-80px] left-1/2 transform -translate-x-1/2 flex gap-3">
             {services.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all ${
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setIsAutoRotating(false);
+                }}
+                className={`rounded-full transition-all ${
                   index === currentIndex
-                    ? "bg-brand-purple scale-125"
-                    : "bg-border hover:bg-brand-purple/50"
+                    ? "bg-brand-purple w-8 h-3"
+                    : "bg-border hover:bg-brand-purple/50 w-3 h-3"
                 }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
                 aria-label={`Ir al servicio ${index + 1}`}
               />
             ))}

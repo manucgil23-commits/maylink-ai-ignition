@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: "¿Cuál es el coste aproximado de una automatización?",
-    answer: "El coste varía según la complejidad y alcance del proyecto. Proyectos básicos pueden comenzar desde 2.000€, mientras que soluciones empresariales más complejas pueden ser significativamente mayores. Ofrecemos presupuestos personalizados sin compromiso después de entender tus necesidades específicas."
+    answer: "El coste varía según la complejidad y alcance del proyecto. Ofrecemos presupuestos personalizados sin compromiso después de entender tus necesidades específicas. Agenda una consulta gratuita para conocer más detalles."
   },
   {
     question: "¿Las soluciones se integran con mis sistemas actuales?",

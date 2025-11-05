@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Code2, MessageSquareCode, Settings2, ArrowRight, Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -79,6 +79,17 @@ const Services3D = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(2);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoRotating) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % services.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isAutoRotating]);
 
   const scrollToContact = () => {
     const element = document.getElementById("contacto");
@@ -154,7 +165,10 @@ const Services3D = () => {
                     perspective: 1200,
                     transformStyle: "preserve-3d",
                   }}
-                  onClick={() => setCurrentIndex(index)}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setIsAutoRotating(false);
+                  }}
                 >
                   <Card
                     className={`w-[350px] p-6 bg-gradient-card border-border transition-all duration-500 ${

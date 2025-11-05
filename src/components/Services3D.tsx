@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Code2, MessageSquareCode, Settings2, ArrowRight, X, Check } from "lucide-react";
+import { Code2, MessageSquareCode, Settings2, ArrowRight, Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
@@ -19,7 +19,6 @@ const services = [
       "Panel de administración",
     ],
     gradient: "from-cyan-500 via-blue-500 to-purple-500",
-    detailedInfo: "Creamos sitios web que no solo lucen increíbles, sino que también están optimizados para convertir visitantes en clientes. Incluye hosting gratuito el primer año y soporte técnico.",
   },
   {
     icon: MessageSquareCode,
@@ -34,7 +33,6 @@ const services = [
     ],
     gradient: "from-purple-500 via-pink-500 to-rose-500",
     featured: true,
-    detailedInfo: "Implementamos chatbots con inteligencia artificial que aprenden de cada interacción. Integración completa con tus sistemas existentes y análisis detallado de conversaciones.",
   },
   {
     icon: Settings2,
@@ -48,29 +46,45 @@ const services = [
       "Soporte prioritario continuo",
     ],
     gradient: "from-orange-500 via-amber-500 to-yellow-500",
-    detailedInfo: "Soluciones enterprise diseñadas específicamente para tu negocio. Escalables, seguras y con el más alto nivel de personalización. Incluye consultoría estratégica.",
+  },
+  {
+    icon: Settings2,
+    title: "Automatización Empresarial",
+    price: "Consultar",
+    description: "Optimiza los procesos internos de tu negocio con flujos de trabajo inteligentes y eficientes.",
+    features: [
+      "Integración entre aplicaciones y plataformas",
+      "Reducción de tareas manuales",
+      "Flujos automatizados personalizables",
+      "Ahorro de tiempo y recursos",
+    ],
+    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
+  },
+  {
+    icon: MessageSquareCode,
+    title: "Asistente Virtual IA",
+    price: "Consultar",
+    description: "Asistentes virtuales diseñados para atender, informar y acompañar a tus clientes en tiempo real.",
+    features: [
+      "Respuestas automáticas personalizadas",
+      "Atención multicanal (web, WhatsApp, email)",
+      "Gestión de citas y consultas",
+      "Disponibilidad 24/7 con IA avanzada",
+    ],
+    gradient: "from-green-500 via-emerald-500 to-teal-500",
   },
 ];
 
 const Services3D = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const [selectedService, setSelectedService] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(2);
 
   const scrollToContact = () => {
     const element = document.getElementById("contacto");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-  };
-
-  const nextService = () => {
-    setCurrentIndex((prev) => (prev + 1) % services.length);
-  };
-
-  const prevService = () => {
-    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
   };
 
   return (
@@ -110,9 +124,9 @@ const Services3D = () => {
           </motion.p>
         </motion.div>
 
-        {/* 3D Carousel */}
-        <div className="relative h-[600px] flex items-center justify-center">
-          <div className="relative w-full max-w-6xl">
+        {/* Carousel 3D */}
+        <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
+          <div className="relative w-full max-w-7xl">
             {services.map((service, index) => {
               const offset = index - currentIndex;
               const absOffset = Math.abs(offset);
@@ -121,39 +135,33 @@ const Services3D = () => {
               return (
                 <motion.div
                   key={service.title}
-                  className="absolute left-1/2 top-1/2"
+                  className="absolute left-1/2 top-1/2 cursor-pointer"
                   initial={false}
                   animate={{
-                    x: offset * 350 - 175,
+                    x: offset * 380 - 175,
                     y: -250,
-                    scale: absOffset === 0 ? 1.1 : 0.8,
-                    rotateY: offset * 25,
-                    z: absOffset === 0 ? 100 : 0,
-                    opacity: absOffset > 1 ? 0 : 1,
+                    scale: absOffset === 0 ? 1.15 : absOffset === 1 ? 0.85 : 0.6,
+                    rotateY: offset * 15,
+                    z: absOffset === 0 ? 100 : absOffset === 1 ? 50 : 0,
+                    opacity: absOffset > 2 ? 0 : absOffset === 2 ? 0.4 : absOffset === 1 ? 0.7 : 1,
                   }}
                   transition={{
                     type: "spring",
-                    stiffness: 200,
-                    damping: 30,
+                    stiffness: 260,
+                    damping: 35,
                   }}
                   style={{
-                    perspective: 1000,
+                    perspective: 1200,
                     transformStyle: "preserve-3d",
                   }}
-                  onClick={() => {
-                    if (absOffset !== 0) {
-                      setCurrentIndex(index);
-                    } else {
-                      setSelectedService(index);
-                    }
-                  }}
+                  onClick={() => setCurrentIndex(index)}
                 >
                   <Card
-                    className={`w-[350px] h-[480px] p-8 bg-gradient-card border-border transition-all duration-500 cursor-pointer ${
+                    className={`w-[350px] p-6 bg-gradient-card border-border transition-all duration-500 ${
                       absOffset === 0
                         ? "border-brand-purple shadow-purple"
                         : "border-border/50"
-                    } ${service.featured && absOffset === 0 ? "ring-2 ring-brand-purple" : ""}`}
+                    } ${service.featured && absOffset === 0 ? "ring-2 ring-brand-purple/50" : ""}`}
                   >
                     {service.featured && absOffset === 0 && (
                       <div className="absolute top-4 right-4 bg-brand-purple text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -161,7 +169,7 @@ const Services3D = () => {
                       </div>
                     )}
 
-                    <div className="relative w-24 h-24 mx-auto mb-6">
+                    <div className="relative w-16 h-16 mx-auto mb-4">
                       <motion.div
                         className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center`}
                         animate={
@@ -181,59 +189,28 @@ const Services3D = () => {
                           ease: "easeInOut",
                         }}
                       >
-                        <Icon className="w-10 h-10 text-white" strokeWidth={1.5} />
+                        <Icon className="w-8 h-8 text-white" strokeWidth={1.5} />
                       </motion.div>
-
-                      {absOffset === 0 &&
-                        [...Array(3)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full bg-brand-purple"
-                            style={{
-                              marginLeft: -4,
-                              marginTop: -4,
-                            }}
-                            animate={{
-                              x: [
-                                0,
-                                Math.cos((i * 2 * Math.PI) / 3) * 50,
-                                0,
-                              ],
-                              y: [
-                                0,
-                                Math.sin((i * 2 * Math.PI) / 3) * 50,
-                                0,
-                              ],
-                              opacity: [0.3, 0.8, 0.3],
-                            }}
-                            transition={{
-                              duration: 3,
-                              repeat: Infinity,
-                              ease: "linear",
-                              delay: i * 0.3,
-                            }}
-                          />
-                        ))}
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-2 text-center">{service.title}</h3>
-                    <p className="text-3xl font-bold text-brand-purple mb-4 text-center">
+                    <h3 className="text-xl font-bold mb-2 text-center">{service.title}</h3>
+                    <p className="text-2xl font-bold text-brand-purple mb-3 text-center">
                       {service.price}
                     </p>
-                    <p className="text-muted-foreground mb-6 leading-relaxed text-center text-sm">
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-center text-sm">
                       {service.description}
                     </p>
 
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-2 mb-4">
                       {service.features.map((feature, i) => (
                         <motion.li
                           key={i}
-                          className="flex items-start gap-2 text-sm"
+                          className="flex items-start gap-2 text-xs"
                           initial={{ opacity: 0, x: -20 }}
-                          animate={absOffset === 0 ? { opacity: 1, x: 0 } : {}}
-                          transition={{ delay: 0.5 + i * 0.1 }}
+                          animate={absOffset === 0 ? { opacity: 1, x: 0 } : { opacity: 0.5, x: 0 }}
+                          transition={{ delay: absOffset === 0 ? 0.3 + i * 0.1 : 0 }}
                         >
-                          <Check className="w-4 h-4 text-brand-purple mt-0.5 flex-shrink-0" />
+                          <Check className="w-3 h-3 text-brand-purple mt-0.5 flex-shrink-0" />
                           <span>{feature}</span>
                         </motion.li>
                       ))}
@@ -245,8 +222,7 @@ const Services3D = () => {
                           e.stopPropagation();
                           scrollToContact();
                         }}
-                        className="w-full bg-brand-purple hover:bg-brand-purple-dark"
-                        size="lg"
+                        className="w-full bg-brand-purple hover:bg-brand-purple-dark mt-4"
                       >
                         Solicitar info
                         <ArrowRight className="ml-2 w-4 h-4" />
@@ -274,65 +250,6 @@ const Services3D = () => {
             ))}
           </div>
         </div>
-
-        {/* Modal de detalles */}
-        <AnimatePresence>
-          {selectedService !== null && (
-            <motion.div
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedService(null)}
-            >
-              <motion.div
-                className="bg-gradient-card border border-brand-purple rounded-2xl p-8 max-w-2xl w-full relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => setSelectedService(null)}
-                  className="absolute top-4 right-4 text-muted-foreground hover:text-brand-purple transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-
-                <h3 className="text-3xl font-bold mb-4">
-                  {services[selectedService].title}
-                </h3>
-                <p className="text-4xl font-bold text-brand-purple mb-6">
-                  {services[selectedService].price}
-                </p>
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  {services[selectedService].detailedInfo}
-                </p>
-
-                <div className="mb-8">
-                  <h4 className="text-xl font-semibold mb-4">Características incluidas:</h4>
-                  <ul className="space-y-3">
-                    {services[selectedService].features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-brand-purple mt-0.5 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Button
-                  onClick={scrollToContact}
-                  className="w-full bg-brand-purple hover:bg-brand-purple-dark"
-                  size="lg"
-                >
-                  Solicitar presupuesto personalizado
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );

@@ -39,7 +39,7 @@ const reasons = [
 const WhyChooseUsEnhanced = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
 
   return (
     <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden">
@@ -82,7 +82,19 @@ const WhyChooseUsEnhanced = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
-            const isExpanded = expandedCard === index;
+            const isExpanded = expandedCards.has(index);
+            
+            const toggleCard = () => {
+              setExpandedCards(prev => {
+                const newSet = new Set(prev);
+                if (newSet.has(index)) {
+                  newSet.delete(index);
+                } else {
+                  newSet.add(index);
+                }
+                return newSet;
+              });
+            };
             
             return (
               <motion.div
@@ -93,9 +105,9 @@ const WhyChooseUsEnhanced = () => {
               >
                 <Card
                   className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden ${
-                    isExpanded ? "lg:col-span-2 border-brand-purple shadow-purple" : ""
+                    isExpanded ? "border-brand-purple shadow-purple" : ""
                   }`}
-                  onClick={() => setExpandedCard(isExpanded ? null : index)}
+                  onClick={toggleCard}
                 >
                   {/* Hover Glow Effect */}
                   <motion.div

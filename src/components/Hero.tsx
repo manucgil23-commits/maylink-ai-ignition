@@ -137,19 +137,19 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
             >
               <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">50+</div>
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">{t.hero.stats.projectsValue}</div>
                 <div className="text-sm text-foreground/80">{t.hero.stats.projects}</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">98%</div>
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">{t.hero.stats.satisfactionValue}</div>
                 <div className="text-sm text-foreground/80">{t.hero.stats.satisfaction}</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">24/7</div>
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">{t.hero.stats.supportValue}</div>
                 <div className="text-sm text-foreground/80">{t.hero.stats.support}</div>
               </div>
               <div className="text-center lg:text-left">
-                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">3 días</div>
+                <div className="text-3xl md:text-4xl font-bold text-brand-purple mb-1">{t.hero.stats.responseValue}</div>
                 <div className="text-sm text-foreground/80">{t.hero.stats.response}</div>
               </div>
             </motion.div>

@@ -30,9 +30,13 @@ const translations = {
       cta1: "Explorar servicios",
       cta2: "Solicitar presupuesto",
       stats: {
+        projectsValue: "50+",
         projects: "Proyectos completados",
+        satisfactionValue: "98%",
         satisfaction: "Satisfacción cliente",
+        supportValue: "24/7",
         support: "Soporte disponible",
+        responseValue: "3 días",
         response: "Respuesta garantizada",
       }
     },
@@ -242,6 +246,30 @@ const translations = {
       madeWith: "Hecho con",
       madeIn: "en España",
     },
+    aboutUs: {
+      title: "Sobre ",
+      titleHighlight: "Nosotros",
+      subtitle: "Transformando el futuro con inteligencia artificial",
+      visionTitle: "Nuestra Visión",
+      visionText: "Ser líderes en innovación tecnológica, creando soluciones de automatización con IA que revolucionen la forma en que las empresas operan y crecen en el mundo digital.",
+      missionTitle: "Nuestra Misión",
+      missionText: "Proporcionar automatizaciones inteligentes y personalizadas que simplifiquen procesos complejos, optimicen recursos y permitan a nuestros clientes enfocarse en lo que realmente importa: hacer crecer su negocio.",
+      valuesTitle: "Nuestros Valores",
+      values: [
+        {
+          name: "Innovación",
+          description: "Estamos siempre a la vanguardia de la tecnología"
+        },
+        {
+          name: "Excelencia",
+          description: "Cada proyecto es una oportunidad para superar expectativas"
+        },
+        {
+          name: "Compromiso",
+          description: "Tu éxito es nuestro éxito, estamos contigo en cada paso"
+        }
+      ]
+    },
   },
   en: {
     nav: {
@@ -260,9 +288,13 @@ const translations = {
       cta1: "Explore services",
       cta2: "Request quote",
       stats: {
+        projectsValue: "50+",
         projects: "Completed projects",
+        satisfactionValue: "98%",
         satisfaction: "Customer satisfaction",
+        supportValue: "24/7",
         support: "Support available",
+        responseValue: "3 days",
         response: "Guaranteed response",
       }
     },
@@ -471,6 +503,30 @@ const translations = {
       copyright: "All rights reserved",
       madeWith: "Made with",
       madeIn: "in Spain",
+    },
+    aboutUs: {
+      title: "About ",
+      titleHighlight: "Us",
+      subtitle: "Transforming the future with artificial intelligence",
+      visionTitle: "Our Vision",
+      visionText: "To be leaders in technological innovation, creating AI automation solutions that revolutionize the way companies operate and grow in the digital world.",
+      missionTitle: "Our Mission",
+      missionText: "Provide intelligent and personalized automations that simplify complex processes, optimize resources and allow our clients to focus on what really matters: growing their business.",
+      valuesTitle: "Our Values",
+      values: [
+        {
+          name: "Innovation",
+          description: "We are always at the forefront of technology"
+        },
+        {
+          name: "Excellence",
+          description: "Every project is an opportunity to exceed expectations"
+        },
+        {
+          name: "Commitment",
+          description: "Your success is our success, we are with you every step"
+        }
+      ]
     },
   },
 };

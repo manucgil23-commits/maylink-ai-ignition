@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Linkedin, Instagram, Twitter, Mail } from "lucide-react";
 import logo from "@/assets/maylink-logo.png";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -25,7 +28,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Conectando con posibilidades infinitas. Automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro.
+              {t.footer.description}
             </p>
             <div className="flex gap-4">
               <motion.a
@@ -71,50 +74,50 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Enlaces rápidos</h3>
+            <h3 className="font-bold text-lg mb-4">{t.footer.quickLinks}</h3>
             <nav className="flex flex-col gap-3">
               <button
                 onClick={() => scrollToSection("inicio")}
                 className="text-muted-foreground hover:text-brand-purple transition-colors text-left"
               >
-                Inicio
+                {t.nav.inicio}
               </button>
               <button
                 onClick={() => scrollToSection("servicios")}
                 className="text-muted-foreground hover:text-brand-purple transition-colors text-left"
               >
-                Servicios
+                {t.nav.servicios}
               </button>
               <button
                 onClick={() => scrollToSection("por-que-elegirnos")}
                 className="text-muted-foreground hover:text-brand-purple transition-colors text-left"
               >
-                Por qué elegirnos
+                {t.nav.porQueElegirnos}
               </button>
               <button
                 onClick={() => scrollToSection("contacto")}
                 className="text-muted-foreground hover:text-brand-purple transition-colors text-left"
               >
-                Contacto
+                {t.nav.contacto}
               </button>
             </nav>
           </div>
 
           {/* Legal */}
           <div>
-            <h3 className="font-bold text-lg mb-4">Legal</h3>
+            <h3 className="font-bold text-lg mb-4">{t.footer.legal}</h3>
             <nav className="flex flex-col gap-3">
               <a href="#" className="text-muted-foreground hover:text-brand-purple transition-colors">
-                Política de privacidad
+                {t.footer.privacy}
               </a>
               <a href="#" className="text-muted-foreground hover:text-brand-purple transition-colors">
-                Términos y condiciones
+                {t.footer.terms}
               </a>
               <a href="#" className="text-muted-foreground hover:text-brand-purple transition-colors">
-                Aviso legal
+                {t.footer.legalNotice}
               </a>
               <a href="#" className="text-muted-foreground hover:text-brand-purple transition-colors">
-                Cookies
+                {t.footer.cookies}
               </a>
             </nav>
           </div>
@@ -124,11 +127,11 @@ const Footer = () => {
         <div className="pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © {currentYear} MayLink AI — Todos los derechos reservados
+              © {currentYear} MayLink AI — {t.footer.copyright}
             </p>
             <p className="text-sm text-muted-foreground">
-              Hecho con{" "}
-              <span className="text-brand-purple">❤</span> en España
+              {t.footer.madeWith}{" "}
+              <span className="text-brand-purple">❤</span> {t.footer.madeIn}
             </p>
           </div>
         </div>

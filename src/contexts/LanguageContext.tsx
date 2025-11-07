@@ -25,7 +25,8 @@ const translations = {
     hero: {
       badge: "Innovación en Automatización",
       title: "Conectando ",
-      titleHighlight: "posibilidades infinitas",
+      titlePart2: "infinitas ",
+      titlePart3: "posibilidades",
       description: "Creamos automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro. Soluciones personalizadas que transforman ideas en realidad.",
       cta1: "Explorar servicios",
       cta2: "Solicitar presupuesto",
@@ -293,7 +294,8 @@ const translations = {
     hero: {
       badge: "Innovation in Automation",
       title: "Connecting ",
-      titleHighlight: "infinite possibilities",
+      titlePart2: "infinite ",
+      titlePart3: "possibilities",
       description: "We create AI-powered automations that drive your business into the future. Customized solutions that transform ideas into reality.",
       cta1: "Explore services",
       cta2: "Request quote",

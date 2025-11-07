@@ -90,8 +90,12 @@ const Hero = () => {
               />
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
                 <TypewriterText 
-                  text={t.hero.titleHighlight}
-                  delay={600}
+                  text={t.hero.titlePart2}
+                  delay={1080}
+                />
+                <TypewriterText 
+                  text={t.hero.titlePart3}
+                  delay={1900}
                 />
               </span>
             </motion.h1>

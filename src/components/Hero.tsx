@@ -102,7 +102,10 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              {t.hero.description}
+              <TypewriterText 
+                text={t.hero.description}
+                delay={500}
+              />
             </motion.p>
 
             <motion.div

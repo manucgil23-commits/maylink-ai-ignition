@@ -42,15 +42,23 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <nav className={`container mx-auto px-4 transition-all duration-300 flex items-center justify-between ${
+        isScrolled ? "py-2" : "py-4"
+      }`}>
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
           onClick={() => scrollToSection("inicio")}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          animate={{ scale: isScrolled ? 0.85 : 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <img src={logo} alt="MayLink AI" className="w-20 h-20" />
-          <span className="text-2xl font-bold">
+          <img src={logo} alt="MayLink AI" className={`transition-all duration-300 ${
+            isScrolled ? "w-14 h-14" : "w-20 h-20"
+          }`} />
+          <span className={`font-bold transition-all duration-300 ${
+            isScrolled ? "text-xl" : "text-2xl"
+          }`}>
             May<span className="text-brand-purple">Link</span> AI
           </span>
         </motion.div>

@@ -9,57 +9,49 @@ interface TypewriterTextProps {
 
 const TypewriterText = ({ text, delay = 0, className = "" }: TypewriterTextProps) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const hasStarted = useRef(false);
-  const words = text.split(" ");
 
   useEffect(() => {
     // Reset when text changes completely
-    const currentWords = displayedText.split(" ").filter(w => w);
-    const newWords = text.split(" ");
+    const firstWord = text.split(" ")[0];
+    const currentFirstWord = displayedText.split(" ")[0];
     
     // Check if the text changed to a completely different text
-    if (currentWords.length > 0 && newWords[0] !== currentWords[0]) {
-      setCurrentWordIndex(0);
+    if (displayedText.length > 0 && firstWord !== currentFirstWord) {
+      setCurrentCharIndex(0);
       setDisplayedText("");
       setIsComplete(false);
       hasStarted.current = false;
       return;
     }
-  }, [text]);
+  }, [text, displayedText]);
 
   useEffect(() => {
     // Wait for initial delay before starting
-    if (!hasStarted.current && currentWordIndex === 0) {
+    if (!hasStarted.current && currentCharIndex === 0) {
       const initialTimeout = setTimeout(() => {
         hasStarted.current = true;
-        setCurrentWordIndex(0);
-        setDisplayedText(words[0]);
-        
-        if (words.length === 1) {
-          setIsComplete(true);
-        }
+        setCurrentCharIndex(1);
       }, delay);
       return () => clearTimeout(initialTimeout);
     }
 
-    // Typewriter effect - word by word
-    if (hasStarted.current && currentWordIndex < words.length - 1) {
+    // Typewriter effect - character by character
+    if (hasStarted.current && currentCharIndex <= text.length) {
       const timeout = setTimeout(() => {
-        const nextIndex = currentWordIndex + 1;
-        const newText = words.slice(0, nextIndex + 1).join(" ");
-        setDisplayedText(newText);
-        setCurrentWordIndex(nextIndex);
+        setDisplayedText(text.substring(0, currentCharIndex));
+        setCurrentCharIndex((prev) => prev + 1);
         
-        if (nextIndex === words.length - 1) {
+        if (currentCharIndex === text.length) {
           setIsComplete(true);
         }
-      }, 400); // 400ms between words
+      }, 80); // 80ms between characters for smooth gradual appearance
 
       return () => clearTimeout(timeout);
     }
-  }, [currentWordIndex, hasStarted.current, delay, words]);
+  }, [currentCharIndex, hasStarted.current, delay, text]);
 
   return (
     <span className={className}>

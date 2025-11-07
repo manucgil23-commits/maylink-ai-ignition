@@ -91,7 +91,7 @@ const Hero = () => {
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple-light bg-clip-text text-transparent">
                 <TypewriterText 
                   text={t.hero.titleHighlight}
-                  delay={200}
+                  delay={600}
                 />
               </span>
             </motion.h1>
@@ -102,10 +102,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <TypewriterText 
-                text={t.hero.description}
-                delay={500}
-              />
+              {t.hero.description}
             </motion.p>
 
             <motion.div

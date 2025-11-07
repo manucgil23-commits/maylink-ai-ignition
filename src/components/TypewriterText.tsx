@@ -9,59 +9,65 @@ interface TypewriterTextProps {
 
 const TypewriterText = ({ text, delay = 0, className = "" }: TypewriterTextProps) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
-  const words = text.split(" ");
   const hasStarted = useRef(false);
+  const words = text.split(" ");
 
   useEffect(() => {
-    // Reset when text changes
-    if (currentCharIndex > text.length) {
-      setCurrentCharIndex(0);
+    // Reset when text changes completely
+    const currentWords = displayedText.split(" ").filter(w => w);
+    const newWords = text.split(" ");
+    
+    // Check if the text changed to a completely different text
+    if (currentWords.length > 0 && newWords[0] !== currentWords[0]) {
+      setCurrentWordIndex(0);
       setDisplayedText("");
       setIsComplete(false);
       hasStarted.current = false;
       return;
     }
+  }, [text]);
 
+  useEffect(() => {
     // Wait for initial delay before starting
-    if (!hasStarted.current) {
+    if (!hasStarted.current && currentWordIndex === 0) {
       const initialTimeout = setTimeout(() => {
         hasStarted.current = true;
-        setCurrentCharIndex(1);
+        setCurrentWordIndex(0);
+        setDisplayedText(words[0]);
+        
+        if (words.length === 1) {
+          setIsComplete(true);
+        }
       }, delay);
       return () => clearTimeout(initialTimeout);
     }
 
-    // Typewriter effect
-    if (currentCharIndex <= text.length) {
+    // Typewriter effect - word by word
+    if (hasStarted.current && currentWordIndex < words.length - 1) {
       const timeout = setTimeout(() => {
-        setDisplayedText(text.substring(0, currentCharIndex));
-        setCurrentCharIndex((prev) => prev + 1);
+        const nextIndex = currentWordIndex + 1;
+        const newText = words.slice(0, nextIndex + 1).join(" ");
+        setDisplayedText(newText);
+        setCurrentWordIndex(nextIndex);
         
-        if (currentCharIndex === text.length) {
+        if (nextIndex === words.length - 1) {
           setIsComplete(true);
         }
-      }, 50); // Fixed 50ms interval for consistent speed
+      }, 400); // 400ms between words
 
       return () => clearTimeout(timeout);
     }
-  }, [currentCharIndex, text, delay]);
-
-  // Handle text change mid-animation
-  useEffect(() => {
-    // If text changes and we're mid-animation, continue from same position
-    if (hasStarted.current && currentCharIndex > 0 && currentCharIndex <= text.length) {
-      setDisplayedText(text.substring(0, currentCharIndex));
-    }
-  }, [text, currentCharIndex]);
+  }, [currentWordIndex, hasStarted.current, delay, words]);
 
   return (
     <span className={className}>
       {displayedText}
       {!isComplete && hasStarted.current && (
         <motion.span
-          className="inline-block w-0.5 h-6 bg-brand-purple ml-1"
+          className="inline-block w-0.5 bg-brand-purple ml-1 align-middle"
+          style={{ height: "1em" }}
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 0.8, repeat: Infinity }}
         />

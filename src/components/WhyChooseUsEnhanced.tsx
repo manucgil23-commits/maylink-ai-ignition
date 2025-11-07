@@ -226,10 +226,10 @@ const WhyChooseUsEnhanced = () => {
           transition={{ delay: 0.8 }}
         >
           {[
-            { value: "50+", label: "Proyectos completados" },
-            { value: "98%", label: "Satisfacción cliente" },
-            { value: "24/7", label: "Soporte disponible" },
-            { value: "3 días", label: "Respuesta garantizada" },
+            { value: t.whyChooseUs.stats.projectsValue, label: t.whyChooseUs.stats.projectsLabel },
+            { value: t.whyChooseUs.stats.satisfactionValue, label: t.whyChooseUs.stats.satisfactionLabel },
+            { value: t.whyChooseUs.stats.supportValue, label: t.whyChooseUs.stats.supportLabel },
+            { value: t.whyChooseUs.stats.responseValue, label: t.whyChooseUs.stats.responseLabel },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}

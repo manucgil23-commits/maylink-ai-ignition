@@ -12,21 +12,18 @@ const TypewriterText = ({ text, delay = 0, className = "" }: TypewriterTextProps
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const hasStarted = useRef(false);
+  const prevText = useRef(text);
 
+  // Reset when text changes
   useEffect(() => {
-    // Reset when text changes completely
-    const firstWord = text.split(" ")[0];
-    const currentFirstWord = displayedText.split(" ")[0];
-    
-    // Check if the text changed to a completely different text
-    if (displayedText.length > 0 && firstWord !== currentFirstWord) {
+    if (prevText.current !== text) {
       setCurrentCharIndex(0);
       setDisplayedText("");
       setIsComplete(false);
       hasStarted.current = false;
-      return;
+      prevText.current = text;
     }
-  }, [text, displayedText]);
+  }, [text]);
 
   useEffect(() => {
     // Wait for initial delay before starting

@@ -1,11 +1,20 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Quote, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+const getInitials = (name: string) => {
+  return name
+    .split(" ")
+    .map(word => word[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+};
 
 const Testimonials = () => {
   const { t } = useLanguage();
@@ -13,18 +22,9 @@ const Testimonials = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Real professional photos for testimonials
-  const realPhotos = [
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-    "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
-  ];
-
-  const testimonials = t.testimonials.items.map((item, index) => ({
+  const testimonials = t.testimonials.items.map((item) => ({
     ...item,
     rating: 5,
-    image: realPhotos[index % realPhotos.length],
   }));
 
   const nextTestimonial = () => {
@@ -82,28 +82,31 @@ const Testimonials = () => {
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="p-8 md:p-12 bg-gradient-card border-border relative overflow-hidden">
+              <Card className="p-8 md:p-12 bg-gradient-card border-border relative overflow-hidden min-h-[400px] flex flex-col">
                 <Quote className="absolute top-4 right-4 w-16 h-16 text-brand-purple/10" />
                 
-                <div className="flex flex-col md:flex-row gap-6 items-start">
-                  <img
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
-                    className="w-20 h-20 rounded-full bg-secondary"
-                  />
+                <div className="flex flex-col md:flex-row gap-6 items-start flex-1">
+                  <div className="w-20 h-20 rounded-full bg-brand-purple/10 flex items-center justify-center flex-shrink-0">
+                    <div className="flex flex-col items-center justify-center">
+                      <User className="w-8 h-8 text-brand-purple mb-1" />
+                      <span className="text-brand-purple font-bold text-sm">
+                        {getInitials(testimonials[currentIndex].name)}
+                      </span>
+                    </div>
+                  </div>
                   
-                  <div className="flex-1">
+                  <div className="flex-1 flex flex-col">
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                         <Star key={i} className="w-5 h-5 fill-brand-purple text-brand-purple" />
                       ))}
                     </div>
                     
-                    <p className="text-lg md:text-xl text-foreground mb-6 leading-relaxed italic">
+                    <p className="text-lg md:text-xl text-foreground mb-6 leading-relaxed italic flex-1">
                       "{testimonials[currentIndex].text}"
                     </p>
                     
-                    <div>
+                    <div className="mt-auto">
                       <p className="font-bold text-lg">{testimonials[currentIndex].name}</p>
                       <p className="text-brand-purple">{testimonials[currentIndex].role}</p>
                       <p className="text-muted-foreground text-sm">{testimonials[currentIndex].company}</p>

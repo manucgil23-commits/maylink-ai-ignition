@@ -110,7 +110,7 @@ const FAQ = () => {
               {t.faq.contactUs}
             </p>
             <Button
-              onClick={scrollToContact}
+              onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
               variant="cta"
               className="relative z-10"
             >

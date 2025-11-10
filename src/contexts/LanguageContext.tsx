@@ -99,12 +99,12 @@ const translations = {
         },
         {
           title: "Software a Medida",
-          description: "Sistemas personalizados de gestión, turnos y procesos diseñados específicamente para tu negocio.",
+          description: "Cualquier aplicación, sistema o solución programada que cubra tus necesidades específicas. Desde CRMs y gestión hasta herramientas completamente personalizadas.",
           features: [
+            "Aplicaciones personalizadas",
             "Sistemas de gestión integral",
-            "Gestión de turnos automatizada",
-            "CRMs personalizados",
-            "Optimización de procesos internos",
+            "CRMs y herramientas empresariales",
+            "Soluciones para cualquier necesidad",
           ],
         },
         {
@@ -241,7 +241,8 @@ const translations = {
       successTitle: "¡Mensaje enviado!",
       successDescription: "Te responderemos en menos de 24 horas",
       bookingTitle: "Agenda tu sesión de estrategia",
-      bookingDescription: "Reserva una videollamada con nuestro equipo y descubre cómo podemos impulsar tu negocio",
+      bookingDescription: "Elige el mejor horario para ti y hablemos de tu proyecto",
+      scheduleButton: "Agendar Reunión",
     },
     footer: {
       description: "Conectando posibilidades infinitas. Automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro.",
@@ -366,12 +367,12 @@ const translations = {
         },
         {
           title: "Custom Software",
-          description: "Personalized management, scheduling and process systems designed specifically for your business.",
+          description: "Any application, system, or programmed solution that meets your specific needs. From CRMs and management to completely custom tools.",
           features: [
+            "Custom applications",
             "Comprehensive management systems",
-            "Automated scheduling management",
-            "Customized CRMs",
-            "Internal process optimization",
+            "CRMs and business tools",
+            "Solutions for any need",
           ],
         },
         {
@@ -508,7 +509,8 @@ const translations = {
       successTitle: "Message sent!",
       successDescription: "We'll respond within 24 hours",
       bookingTitle: "Schedule your strategy session",
-      bookingDescription: "Book a video call with our team and discover how we can boost your business",
+      bookingDescription: "Choose the best time for you and let's talk about your project",
+      scheduleButton: "Schedule Meeting",
     },
     footer: {
       description: "Connecting infinite possibilities. AI-powered automations that drive your business into the future.",

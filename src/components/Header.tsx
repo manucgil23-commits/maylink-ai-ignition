@@ -92,7 +92,7 @@ const Header = () => {
             <Languages className="w-5 h-5" />
           </Button>
           <Button
-            onClick={() => scrollToSection("contacto")}
+            onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
             variant="cta"
           >
             {t.nav.contacto}
@@ -139,7 +139,7 @@ const Header = () => {
               </button>
             ))}
             <Button
-              onClick={() => scrollToSection("contacto")}
+              onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
               variant="cta"
             >
               {t.nav.contacto}

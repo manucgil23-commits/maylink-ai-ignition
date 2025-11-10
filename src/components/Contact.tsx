@@ -164,28 +164,27 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Cal.com Integration */}
+          {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.5 }}
+            className="flex items-center justify-center"
           >
-            <Card className="p-8 bg-gradient-card border-border">
-              <div className="space-y-6">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold mb-2">{t.contact.bookingTitle}</h3>
-                  <p className="text-muted-foreground">{t.contact.bookingDescription}</p>
-                </div>
+            <Card className="p-8 bg-gradient-card border-border w-full">
+              <div className="text-center space-y-6">
+                <h3 className="text-2xl font-bold mb-2">{t.contact.bookingTitle}</h3>
+                <p className="text-muted-foreground mb-8">{t.contact.bookingDescription}</p>
                 
-                <div className="w-full h-[600px] rounded-lg overflow-hidden">
-                  <iframe
-                    src="https://cal.com/maylinkai/sesiondeestrategia"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    title="Book a meeting"
-                  />
-                </div>
+                <Button
+                  variant="cta"
+                  size="lg"
+                  onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
+                  className="mx-auto"
+                >
+                  <Send className="w-5 h-5 mr-2" />
+                  {t.contact.scheduleButton}
+                </Button>
               </div>
             </Card>
           </motion.div>

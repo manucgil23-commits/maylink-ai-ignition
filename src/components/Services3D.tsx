@@ -265,7 +265,7 @@ const Services3D = () => {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          scrollToContact();
+                          window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank');
                         }}
                         variant="cta"
                         className="w-full mt-4"

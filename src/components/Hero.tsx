@@ -127,7 +127,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => scrollToSection("contacto")}
+                onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
                 className="border-brand-purple text-brand-purple hover:bg-brand-purple/10"
               >
                 {t.hero.cta2}

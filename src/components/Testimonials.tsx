@@ -13,10 +13,18 @@ const Testimonials = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Real professional photos for testimonials
+  const realPhotos = [
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
+  ];
+
   const testimonials = t.testimonials.items.map((item, index) => ({
     ...item,
     rating: 5,
-    image: `https://api.dicebear.com/7.x/avataaars/svg?seed=${item.name}`,
+    image: realPhotos[index % realPhotos.length],
   }));
 
   const nextTestimonial = () => {

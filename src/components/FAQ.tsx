@@ -111,7 +111,8 @@ const FAQ = () => {
             </p>
             <Button
               onClick={scrollToContact}
-              className="bg-brand-purple hover:bg-brand-purple-dark relative z-10"
+              variant="cta"
+              className="relative z-10"
             >
               {t.faq.contactButton}
             </Button>

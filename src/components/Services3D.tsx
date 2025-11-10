@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Code2, MessageSquareCode, Settings2, ArrowRight, Check } from "lucide-react";
+import { Code2, MessageSquareCode, Settings2, ArrowRight, Check, Globe, Zap, Palette } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
@@ -9,69 +9,44 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   {
-    icon: Code2,
-    title: "Web Express",
+    icon: Globe,
+    title: "Desarrollo Web y Aplicaciones",
     price: "Consultar",
-    description: "Páginas web profesionales, rápidas y modernas que convierten visitantes en clientes.",
-    features: [
-      "Diseño responsive y moderno",
-      "Optimización SEO básica",
-      "Integración con redes sociales",
-      "Panel de administración",
-    ],
-    gradient: "from-cyan-500 via-blue-500 to-purple-500",
+    description: "Sitios web y aplicaciones profesionales con hosting y mantenimiento incluido.",
+    features: [],
+    gradient: "from-blue-500 via-cyan-500 to-teal-500",
   },
   {
-    icon: MessageSquareCode,
-    title: "IA Interactiva",
+    icon: Settings2,
+    title: "Software a Medida",
     price: "Consultar",
-    description: "Chatbots inteligentes y automatizaciones que atienden a tus clientes 24/7.",
-    features: [
-      "Chatbot con IA conversacional",
-      "Automatización de citas y reservas",
-      "Respuestas personalizadas",
-      "Integración con WhatsApp",
-    ],
+    description: "Sistemas personalizados de gestión, turnos y procesos.",
+    features: [],
     gradient: "from-purple-500 via-pink-500 to-rose-500",
     featured: true,
   },
   {
-    icon: Settings2,
-    title: "Solución a medida",
+    icon: MessageSquareCode,
+    title: "IA Conversacional",
     price: "Consultar",
-    description: "Automatizaciones avanzadas totalmente personalizadas para desafíos únicos.",
-    features: [
-      "Análisis personalizado de necesidades",
-      "Desarrollo a medida",
-      "Integración con sistemas existentes",
-      "Soporte prioritario continuo",
-    ],
+    description: "Agentes inteligentes, chatbots y asistentes de voz.",
+    features: [],
+    gradient: "from-indigo-500 via-purple-500 to-pink-500",
+  },
+  {
+    icon: Zap,
+    title: "Automatización de Procesos",
+    price: "Consultar",
+    description: "Optimiza tu operativa automatizando tareas y workflows.",
+    features: [],
     gradient: "from-orange-500 via-amber-500 to-yellow-500",
   },
   {
-    icon: Settings2,
-    title: "Automatización Empresarial",
+    icon: Palette,
+    title: "Branding y Estrategia Digital",
     price: "Consultar",
-    description: "Optimiza los procesos internos de tu negocio con flujos de trabajo inteligentes y eficientes.",
-    features: [
-      "Integración entre aplicaciones y plataformas",
-      "Reducción de tareas manuales",
-      "Flujos automatizados personalizables",
-      "Ahorro de tiempo y recursos",
-    ],
-    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
-  },
-  {
-    icon: MessageSquareCode,
-    title: "Asistente Virtual IA",
-    price: "Consultar",
-    description: "Asistentes virtuales diseñados para atender, informar y acompañar a tus clientes en tiempo real.",
-    features: [
-      "Respuestas automáticas personalizadas",
-      "Atención multicanal (web, WhatsApp, email)",
-      "Gestión de citas y consultas",
-      "Disponibilidad 24/7 con IA avanzada",
-    ],
+    description: "Logos profesionales, SEO y estrategia digital integral.",
+    features: [],
     gradient: "from-green-500 via-emerald-500 to-teal-500",
   },
 ];
@@ -118,7 +93,7 @@ const Services3D = () => {
   const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [currentIndex, setCurrentIndex] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
 
   useEffect(() => {
@@ -292,7 +267,8 @@ const Services3D = () => {
                           e.stopPropagation();
                           scrollToContact();
                         }}
-                        className="w-full bg-brand-purple hover:bg-brand-purple-dark mt-4"
+                        variant="cta"
+                        className="w-full mt-4"
                       >
                         {t.services.requestInfo}
                         <ArrowRight className="ml-2 w-4 h-4" />

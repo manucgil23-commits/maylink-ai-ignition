@@ -93,7 +93,7 @@ const Header = () => {
           </Button>
           <Button
             onClick={() => scrollToSection("contacto")}
-            className="bg-brand-purple hover:bg-brand-purple-dark transition-all shadow-glow"
+            variant="cta"
           >
             {t.nav.contacto}
           </Button>
@@ -140,7 +140,7 @@ const Header = () => {
             ))}
             <Button
               onClick={() => scrollToSection("contacto")}
-              className="bg-brand-purple hover:bg-brand-purple-dark w-full"
+              variant="cta"
             >
               {t.nav.contacto}
             </Button>

@@ -164,78 +164,29 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Cal.com Integration */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.5 }}
           >
             <Card className="p-8 bg-gradient-card border-border">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    {t.contact.formName} *
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder={t.contact.formNamePlaceholder}
-                    className="bg-background border-border focus:border-brand-purple"
-                    required
+              <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2">{t.contact.bookingTitle}</h3>
+                  <p className="text-muted-foreground">{t.contact.bookingDescription}</p>
+                </div>
+                
+                <div className="w-full h-[600px] rounded-lg overflow-hidden">
+                  <iframe
+                    src="https://cal.com/maylinkai/sesiondeestrategia"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    title="Book a meeting"
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    {t.contact.formEmail} *
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder={t.contact.formEmailPlaceholder}
-                    className="bg-background border-border focus:border-brand-purple"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    {t.contact.formMessage} *
-                  </label>
-                  <Textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder={t.contact.formMessagePlaceholder}
-                    className="bg-background border-border focus:border-brand-purple min-h-[150px]"
-                    required
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full bg-brand-purple hover:bg-brand-purple-dark"
-                  size="lg"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>{t.contact.formSubmitting}</>
-                  ) : (
-                    <>
-                      {t.contact.formSubmit}
-                      <Send className="ml-2 w-4 h-4" />
-                    </>
-                  )}
-                </Button>
-
-                <p className="text-xs text-muted-foreground text-center">
-                  {t.contact.formPrivacy}
-                </p>
-              </form>
+              </div>
             </Card>
           </motion.div>
         </div>

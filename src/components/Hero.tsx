@@ -117,8 +117,9 @@ const Hero = () => {
             >
               <Button
                 size="lg"
+                variant="cta"
                 onClick={() => scrollToSection("servicios")}
-                className="bg-brand-purple hover:bg-brand-purple-dark text-white shadow-purple group"
+                className="group"
               >
                 {t.hero.cta1}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

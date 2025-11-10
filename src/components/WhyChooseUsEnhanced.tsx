@@ -80,7 +80,7 @@ const WhyChooseUsEnhanced = () => {
           </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {t.whyChooseUs.cards.map((card, index) => {
             const reason = reasons[index];
             const Icon = reason.icon;
@@ -104,9 +104,10 @@ const WhyChooseUsEnhanced = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                className="flex"
               >
                 <Card
-                  className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden ${
+                  className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col ${
                     isExpanded ? "border-brand-purple shadow-purple" : ""
                   }`}
                   onClick={toggleCard}
@@ -193,7 +194,7 @@ const WhyChooseUsEnhanced = () => {
                   </AnimatePresence>
 
                   <motion.div
-                    className="flex items-center gap-2 text-brand-purple text-sm font-medium mt-4"
+                    className="flex items-center gap-2 text-brand-purple text-sm font-medium mt-auto pt-4"
                     animate={
                       isExpanded
                         ? { y: [0, -5, 0] }

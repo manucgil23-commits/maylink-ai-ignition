@@ -9,7 +9,6 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import FloatingBar from "@/components/FloatingBar";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,15 +23,14 @@ const Index = () => {
         <>
           <Header />
           <main>
-      <Hero />
-      <WhyChooseUsEnhanced />
+            <Hero />
+            <WhyChooseUsEnhanced />
             <Services3D />
             <Testimonials />
             <FAQ />
             <Contact />
           </main>
           <Footer />
-          <FloatingBar />
         </>
       )}
     </>

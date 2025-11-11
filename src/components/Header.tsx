@@ -28,8 +28,8 @@ const Header = () => {
 
   const menuItems = [
     { label: t.nav.inicio, id: "inicio" },
-    { label: t.nav.servicios, id: "servicios" },
     { label: t.nav.porQueElegirnos, id: "por-que-elegirnos" },
+    { label: t.nav.servicios, id: "servicios" },
     { label: t.nav.faq, id: "faq" },
   ];
 

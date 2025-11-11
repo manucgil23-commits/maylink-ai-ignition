@@ -86,7 +86,8 @@ const WhyChooseUsEnhanced = () => {
             const Icon = reason.icon;
             const isExpanded = expandedCards.has(index);
             
-            const toggleCard = () => {
+            const toggleCard = (e: React.MouseEvent) => {
+              e.stopPropagation();
               setExpandedCards(prev => {
                 const newSet = new Set(prev);
                 if (newSet.has(index)) {
@@ -110,7 +111,7 @@ const WhyChooseUsEnhanced = () => {
                   className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col ${
                     isExpanded ? "border-brand-purple shadow-purple" : ""
                   }`}
-                  onClick={toggleCard}
+                  onClick={(e) => toggleCard(e)}
                 >
                   {/* Hover Glow Effect */}
                   <motion.div

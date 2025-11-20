@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -8,6 +9,23 @@ import { Skeleton } from "@/components/ui/skeleton";
 const BlogList = () => {
   const { data: posts, isLoading } = useBlogPosts();
   const { t } = useLanguage();
+
+  // Prefetch blog post pages on hover
+  useEffect(() => {
+    const links = document.querySelectorAll<HTMLAnchorElement>('a[href^="/blog/"]');
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        const href = link.getAttribute("href");
+        if (href) {
+          // Prefetch the page
+          const prefetchLink = document.createElement("link");
+          prefetchLink.rel = "prefetch";
+          prefetchLink.href = href;
+          document.head.appendChild(prefetchLink);
+        }
+      });
+    });
+  }, [posts]);
 
   if (isLoading) {
     return (

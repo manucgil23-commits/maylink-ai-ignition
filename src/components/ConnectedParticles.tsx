@@ -37,14 +37,14 @@ const ConnectedParticles = () => {
     };
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Initialize particles with varying sizes
-    const particleCount = 80;
+    // Initialize particles with varying sizes - more particles for better coverage
+    const particleCount = 150;
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.8,
-      vy: (Math.random() - 0.5) * 0.8,
-      size: Math.random() * 2 + 1,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 1.5 + 0.8,
       hue: Math.random() * 60 + 260, // Purple to blue range
     }));
 
@@ -83,7 +83,7 @@ const ConnectedParticles = () => {
           particle.y = Math.max(0, Math.min(canvas.height, particle.y));
         }
 
-        // Draw particle with glow effect
+        // Draw particle with glow effect - reduced opacity to not overpower content
         const gradient = ctx.createRadialGradient(
           particle.x,
           particle.y,
@@ -92,7 +92,7 @@ const ConnectedParticles = () => {
           particle.y,
           particle.size * 3
         );
-        gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 60%, 0.8)`);
+        gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 60%, 0.4)`);
         gradient.addColorStop(1, `hsla(${particle.hue}, 80%, 60%, 0)`);
 
         ctx.beginPath();
@@ -100,10 +100,10 @@ const ConnectedParticles = () => {
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Core particle
+        // Core particle - slightly more subtle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${particle.hue}, 90%, 70%, 0.9)`;
+        ctx.fillStyle = `hsla(${particle.hue}, 90%, 70%, 0.6)`;
         ctx.fill();
       });
 
@@ -114,8 +114,8 @@ const ConnectedParticles = () => {
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 120) {
-            // Create flowing gradient line
+          if (distance < 150) {
+            // Create flowing gradient line - increased distance for more connections
             const gradient = ctx.createLinearGradient(
               particle.x,
               particle.y,
@@ -123,7 +123,7 @@ const ConnectedParticles = () => {
               otherParticle.y
             );
             
-            const opacity = (1 - distance / 120) * 0.4;
+            const opacity = (1 - distance / 150) * 0.25;
             const offset = (time * 2) % 1;
             
             gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 60%, 0)`);
@@ -135,18 +135,18 @@ const ConnectedParticles = () => {
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
             ctx.strokeStyle = gradient;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 1.5;
             ctx.stroke();
 
-            // Add pulsing energy dots along the line
-            if (distance < 80) {
+            // Add pulsing energy dots along the line - more subtle
+            if (distance < 100) {
               const pulsePos = offset;
               const pulseX = particle.x + (otherParticle.x - particle.x) * pulsePos;
               const pulseY = particle.y + (otherParticle.y - particle.y) * pulsePos;
               
               ctx.beginPath();
-              ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
-              ctx.fillStyle = `hsla(280, 90%, 70%, ${opacity * 1.5})`;
+              ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
+              ctx.fillStyle = `hsla(280, 90%, 70%, ${opacity * 1.2})`;
               ctx.fill();
             }
           }
@@ -170,10 +170,11 @@ const ConnectedParticles = () => {
   return (
     <motion.canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
+      className="absolute inset-0 pointer-events-none opacity-90"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: 0.9 }}
       transition={{ duration: 1 }}
+      style={{ zIndex: 0 }}
     />
   );
 };

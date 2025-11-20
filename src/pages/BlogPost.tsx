@@ -165,7 +165,7 @@ const BlogPost = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="prose prose-invert prose-lg max-w-none mb-12"
+            className="prose prose-invert prose-lg prose-headings:text-foreground prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-2xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-p:text-foreground/90 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-brand-purple prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-ul:text-foreground/90 prose-ol:text-foreground/90 prose-li:mb-2 max-w-none mb-12"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
@@ -191,7 +191,7 @@ const BlogPost = () => {
                     "_blank"
                   )
                 }
-                className="bg-brand-purple hover:bg-brand-purple-dark text-primary-foreground"
+                variant="cta"
               >
                 {t.blog.ctaButton}
                 <ExternalLink className="w-4 h-4 ml-2" />

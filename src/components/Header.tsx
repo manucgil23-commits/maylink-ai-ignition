@@ -4,11 +4,14 @@ import { Menu, X, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/maylink-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +22,30 @@ const Header = () => {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
+    // If we're not on the homepage, navigate to it first
+    if (location.pathname !== '/') {
+      navigate('/');
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      scrollToSection("inicio");
     }
   };
 
@@ -31,6 +54,7 @@ const Header = () => {
     { label: t.nav.porQueElegirnos, id: "por-que-elegirnos" },
     { label: t.nav.servicios, id: "servicios" },
     { label: t.nav.faq, id: "faq" },
+    { label: "Blog", id: "blog", isRoute: true },
   ];
 
   return (
@@ -47,7 +71,7 @@ const Header = () => {
       }`}>
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
-          onClick={() => scrollToSection("inicio")}
+          onClick={handleLogoClick}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           animate={{ scale: isScrolled ? 0.85 : 1 }}
@@ -68,7 +92,7 @@ const Header = () => {
           {menuItems.map((item, index) => (
             <motion.button
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => item.isRoute ? navigate('/blog') : scrollToSection(item.id)}
               className="text-foreground/80 hover:text-brand-purple transition-colors relative group whitespace-nowrap"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -132,7 +156,7 @@ const Header = () => {
             {menuItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => item.isRoute ? navigate('/blog') : scrollToSection(item.id)}
                 className="text-left text-foreground/80 hover:text-brand-purple transition-colors py-2"
               >
                 {item.label}

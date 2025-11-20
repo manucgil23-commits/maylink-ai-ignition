@@ -116,10 +116,10 @@ const Contact = () => {
                   <div>
                     <p className="font-semibold mb-1">{t.contact.email}</p>
                     <a
-                      href="mailto:hola@maylink.ai"
+                      href="mailto:maylinkai00@gmail.com"
                       className="text-muted-foreground hover:text-brand-purple transition-colors"
                     >
-                      hola@maylink.ai
+                      maylinkai00@gmail.com
                     </a>
                   </div>
                 </div>
@@ -133,10 +133,10 @@ const Contact = () => {
                   <div>
                     <p className="font-semibold mb-1">{t.contact.phone}</p>
                     <a
-                      href="tel:+34123456789"
+                      href="tel:+34617029088"
                       className="text-muted-foreground hover:text-brand-purple transition-colors"
                     >
-                      +34 123 456 789
+                      +34 617 029 088
                     </a>
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogList from "@/components/blog/BlogList";
+import ConnectedParticles from "@/components/ConnectedParticles";
 import { useEffect } from "react";
 
 const Blog = () => {
@@ -26,7 +27,8 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background pt-20">
+      <main className="min-h-screen bg-background pt-20 relative">
+        <ConnectedParticles />
         {/* Hero Section */}
         <section className="relative py-20 px-4 overflow-hidden">
           {/* Background Gradient */}

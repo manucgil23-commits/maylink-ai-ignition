@@ -1,12 +1,22 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import robotCityscape from "@/assets/robot-cityscape.jpg";
 import TypewriterText from "./TypewriterText";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useRef } from "react";
 
 const Hero = () => {
   const { t } = useLanguage();
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const particlesY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -17,11 +27,12 @@ const Hero = () => {
 
   return (
     <section
+      ref={ref}
       id="inicio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32"
     >
-      {/* Full Background Robot Image */}
-      <div className="absolute inset-0">
+      {/* Full Background Robot Image with Parallax */}
+      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <img
           src={robotCityscape}
           alt="Robot futurista con inteligencia artificial observando ciudad tecnológica - Automatización empresarial"
@@ -34,10 +45,10 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
-      </div>
+      </motion.div>
 
-      {/* Animated particles */}
-      <div className="absolute inset-0 z-[1]">
+      {/* Animated particles with Parallax */}
+      <motion.div className="absolute inset-0 z-[1]" style={{ y: particlesY }}>
         {[...Array(60)].map((_, i) => (
           <motion.div
             key={i}
@@ -58,9 +69,9 @@ const Hero = () => {
             }}
           />
         ))}
-      </div>
+      </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <motion.div className="container mx-auto px-4 relative z-10" style={{ y: contentY }}>
         <div className="flex items-center justify-center lg:justify-start min-h-screen">
           {/* Text Content - Centered/Left aligned over full background */}
           <motion.div
@@ -164,7 +175,7 @@ const Hero = () => {
           </motion.div>
 
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div

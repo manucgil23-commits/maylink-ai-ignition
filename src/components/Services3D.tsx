@@ -198,6 +198,8 @@ const Services3D = () => {
                     setCurrentIndex(index);
                     setIsAutoRotating(false);
                   }}
+                  whileHover={absOffset === 0 ? { scale: 1.05, rotateY: 0 } : {}}
+                  whileTap={absOffset === 0 ? { scale: 0.98 } : {}}
                 >
                   <Card
                     className={`w-[350px] p-6 bg-gradient-card border-border transition-all duration-500 hover-glow ${

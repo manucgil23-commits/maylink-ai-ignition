@@ -109,11 +109,17 @@ const Contact = () => {
             </div>
 
             <div className="space-y-6">
-              <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
-                    <Mail className="w-6 h-6 text-brand-purple" aria-hidden="true" />
-                  </div>
+              <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
+                <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
+                  <div className="flex items-start gap-4">
+                    <motion.div 
+                      className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" 
+                      aria-hidden="true"
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Mail className="w-6 h-6 text-brand-purple" aria-hidden="true" />
+                    </motion.div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.email}</p>
                     <a
@@ -123,14 +129,21 @@ const Contact = () => {
                       maylinkai00@gmail.com
                     </a>
                   </div>
-                </div>
-              </Card>
-
-              <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
-                    <Phone className="w-6 h-6 text-brand-purple" aria-hidden="true" />
                   </div>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
+                <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
+                  <div className="flex items-start gap-4">
+                    <motion.div 
+                      className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" 
+                      aria-hidden="true"
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Phone className="w-6 h-6 text-brand-purple" aria-hidden="true" />
+                    </motion.div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.phone}</p>
                     <a
@@ -140,20 +153,28 @@ const Contact = () => {
                       +34 617 029 088
                     </a>
                   </div>
-                </div>
-              </Card>
-
-              <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
-                    <MapPin className="w-6 h-6 text-brand-purple" aria-hidden="true" />
                   </div>
+                </Card>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.02, y: -2 }} transition={{ duration: 0.2 }}>
+                <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
+                  <div className="flex items-start gap-4">
+                    <motion.div 
+                      className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" 
+                      aria-hidden="true"
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <MapPin className="w-6 h-6 text-brand-purple" aria-hidden="true" />
+                    </motion.div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.location}</p>
                     <p className="text-muted-foreground">{t.contact.locationValue}</p>
                   </div>
-                </div>
-              </Card>
+                  </div>
+                </Card>
+              </motion.div>
             </div>
 
             <div className="p-6 bg-brand-purple/5 border border-brand-purple/20 rounded-lg">

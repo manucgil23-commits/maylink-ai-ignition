@@ -26,17 +26,14 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background pt-32">
+      <main className="min-h-screen bg-background pt-24">
         {/* Hero Section */}
-        <section className="relative py-12 px-4 overflow-hidden">
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/10 via-transparent to-transparent" />
-          
+        <section className="relative py-16 px-4">
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-brand-purple via-brand-purple-light to-brand-purple bg-clip-text text-transparent"
+              className="text-4xl md:text-5xl font-bold mb-6 text-foreground"
             >
               {t.blog.pageTitle}
             </motion.h1>

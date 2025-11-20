@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import SEO from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,7 +10,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
+    <>
+      <SEO
+        title="Página no encontrada - 404"
+        description="La página que buscas no existe. Vuelve a la página principal de MayLink AI."
+        noindex={true}
+      />
+      <div className="flex min-h-screen items-center justify-center bg-background">
       <div className="text-center">
         <h1 className="mb-4 text-6xl font-bold text-brand-purple">404</h1>
         <p className="mb-4 text-xl text-foreground">Oops! Página no encontrada</p>
@@ -18,6 +25,7 @@ const NotFound = () => {
         </a>
       </div>
     </div>
+    </>
   );
 };
 

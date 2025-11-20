@@ -3,6 +3,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogList from "@/components/blog/BlogList";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { useEffect } from "react";
 
 const Blog = () => {
@@ -25,6 +27,27 @@ const Blog = () => {
 
   return (
     <>
+      <SEO
+        title={t.blog.pageTitle}
+        description={t.blog.pageDescription}
+        keywords={[
+          "blog IA",
+          "inteligencia artificial",
+          "automatización",
+          "tecnología",
+          "transformación digital",
+          "chatbots",
+          "desarrollo web",
+        ]}
+        canonicalUrl="https://maylinkai.lovable.app/blog"
+      />
+      <StructuredData
+        type="breadcrumb"
+        items={[
+          { name: "Inicio", url: "https://maylinkai.lovable.app/" },
+          { name: "Blog", url: "https://maylinkai.lovable.app/blog" },
+        ]}
+      />
       <Header />
       <main className="min-h-screen bg-background pt-24">
         {/* Hero Section */}

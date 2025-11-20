@@ -6,6 +6,9 @@ import { useBlogPost } from "@/hooks/useBlogPosts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -15,33 +18,7 @@ const BlogPost = () => {
   const { data: post, isLoading } = useBlogPost(slug || "");
   const { t } = useLanguage();
 
-  useEffect(() => {
-    if (post) {
-      // Set page title and meta description
-      document.title = `${post.title} | Maylink AI Blog`;
-      
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute("content", post.excerpt);
-      } else {
-        const meta = document.createElement("meta");
-        meta.name = "description";
-        meta.content = post.excerpt;
-        document.head.appendChild(meta);
-      }
-
-      // Set keywords
-      const metaKeywords = document.querySelector('meta[name="keywords"]');
-      if (metaKeywords) {
-        metaKeywords.setAttribute("content", post.seo_keywords.join(", "));
-      } else {
-        const meta = document.createElement("meta");
-        meta.name = "keywords";
-        meta.content = post.seo_keywords.join(", ");
-        document.head.appendChild(meta);
-      }
-    }
-  }, [post]);
+  // Remove the old useEffect - SEO component will handle it now
 
   if (isLoading) {
     return (
@@ -85,9 +62,56 @@ const BlogPost = () => {
 
   return (
     <>
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        keywords={post.seo_keywords}
+        ogImage={post.cover_image}
+        ogType="article"
+        article={{
+          publishedTime: post.published_at,
+          modifiedTime: post.updated_at,
+          author: post.author_name,
+          tags: post.seo_keywords,
+        }}
+        canonicalUrl={`https://maylinkai.lovable.app/blog/${post.slug}`}
+      />
+      <StructuredData
+        type="article"
+        headline={post.title}
+        description={post.excerpt}
+        image={post.cover_image}
+        datePublished={post.published_at}
+        dateModified={post.updated_at}
+        author={post.author_name}
+        keywords={post.seo_keywords}
+      />
+      <StructuredData
+        type="breadcrumb"
+        items={[
+          { name: "Inicio", url: "https://maylinkai.lovable.app/" },
+          { name: "Blog", url: "https://maylinkai.lovable.app/blog" },
+          { name: post.title, url: `https://maylinkai.lovable.app/blog/${post.slug}` },
+        ]}
+      />
       <Header />
       <main className="min-h-screen bg-background pt-20">
         <article className="max-w-4xl mx-auto px-4 py-12">
+          {/* Breadcrumbs */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6"
+          >
+            <Breadcrumbs
+              items={[
+                { label: t.nav.inicio, href: "/" },
+                { label: "Blog", href: "/blog" },
+                { label: post.title },
+              ]}
+            />
+          </motion.div>
+
           {/* Back Button */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -157,6 +181,9 @@ const BlogPost = () => {
               src={post.cover_image}
               alt={post.title}
               className="w-full h-auto object-cover"
+              loading="lazy"
+              width="896"
+              height="504"
             />
           </motion.div>
 

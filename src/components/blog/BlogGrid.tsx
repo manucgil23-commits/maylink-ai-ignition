@@ -4,6 +4,7 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/skeleton";
+import ConnectedParticles from "@/components/ConnectedParticles";
 
 interface BlogGridProps {
   limit?: number;
@@ -30,8 +31,9 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
   if (!posts || posts.length === 0) return null;
 
   return (
-    <section className="py-20 px-4 bg-background" id="blog">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 px-4 bg-background relative overflow-hidden" id="blog">
+      <ConnectedParticles />
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

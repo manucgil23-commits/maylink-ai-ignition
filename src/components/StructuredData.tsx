@@ -23,10 +23,28 @@ interface BreadcrumbSchemaProps {
   }>;
 }
 
+interface FAQSchemaProps {
+  type: "faq";
+  questions: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+interface ServiceSchemaProps {
+  type: "service";
+  services: Array<{
+    name: string;
+    description: string;
+  }>;
+}
+
 type StructuredDataProps =
   | OrganizationSchemaProps
   | ArticleSchemaProps
-  | BreadcrumbSchemaProps;
+  | BreadcrumbSchemaProps
+  | FAQSchemaProps
+  | ServiceSchemaProps;
 
 const StructuredData = (props: StructuredDataProps) => {
   const getSchema = () => {
@@ -96,6 +114,39 @@ const StructuredData = (props: StructuredDataProps) => {
           position: index + 1,
           name: item.name,
           item: item.url,
+        })),
+      };
+    }
+
+    if (props.type === "faq") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: props.questions.map((q) => ({
+          "@type": "Question",
+          name: q.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: q.answer,
+          },
+        })),
+      };
+    }
+
+    if (props.type === "service") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        itemListElement: props.services.map((service, index) => ({
+          "@type": "Service",
+          position: index + 1,
+          name: service.name,
+          description: service.description,
+          provider: {
+            "@type": "Organization",
+            name: "MayLink AI",
+            url: baseUrl,
+          },
         })),
       };
     }

@@ -16,7 +16,7 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
 
   if (isLoading) {
     return (
-      <section className="py-20 px-4 bg-background">
+      <section className="py-20 px-4 bg-transparent">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
@@ -31,7 +31,7 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
   if (!posts || posts.length === 0) return null;
 
   return (
-    <section className="py-20 px-4 bg-background relative overflow-hidden" id="blog">
+    <section className="py-20 px-4 bg-transparent relative overflow-hidden" id="blog">
       <ConnectedParticles />
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}

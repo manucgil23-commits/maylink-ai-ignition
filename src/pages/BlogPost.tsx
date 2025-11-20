@@ -6,7 +6,6 @@ import { useBlogPost } from "@/hooks/useBlogPosts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ConnectedParticles from "@/components/ConnectedParticles";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -48,8 +47,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-background pt-20 relative">
-          <ConnectedParticles />
+        <main className="min-h-screen bg-background pt-20">
           <article className="max-w-4xl mx-auto px-4 py-12">
             <Skeleton className="h-12 w-3/4 mb-4" />
             <Skeleton className="h-6 w-1/2 mb-8" />
@@ -68,8 +66,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <main className="min-h-screen bg-background pt-20 relative">
-          <ConnectedParticles />
+        <main className="min-h-screen bg-background pt-20">
           <div className="max-w-4xl mx-auto px-4 py-20 text-center">
             <h1 className="text-4xl font-bold mb-4">{t.blog.postNotFound}</h1>
             <p className="text-muted-foreground mb-8">
@@ -89,8 +86,7 @@ const BlogPost = () => {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background pt-20 relative">
-        <ConnectedParticles />
+      <main className="min-h-screen bg-background pt-20">
         <article className="max-w-4xl mx-auto px-4 py-12">
           {/* Back Button */}
           <motion.div

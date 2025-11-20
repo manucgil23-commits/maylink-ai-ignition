@@ -125,8 +125,6 @@ const Services3D = () => {
 
   return (
     <section id="servicios" className="py-20 md:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-secondary/10" />
-      
       {/* Connected Particles Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <ConnectedParticles />

@@ -280,6 +280,25 @@ const translations = {
         }
       ]
     },
+    blog: {
+      title: "Últimos Artículos",
+      subtitle: "Descubre insights, casos de éxito y tendencias en IA y automatización",
+      pageTitle: "Blog",
+      pageDescription: "Artículos sobre inteligencia artificial, automatización empresarial y transformación digital",
+      readMore: "Leer más",
+      viewAll: "Ver todos los artículos",
+      minRead: "min lectura",
+      locale: "es-ES",
+      noPosts: "No hay artículos disponibles",
+      noPostsDesc: "Vuelve pronto para ver nuestros próximos artículos",
+      backHome: "Volver al inicio",
+      postNotFound: "Artículo no encontrado",
+      postNotFoundDesc: "El artículo que buscas no existe o ha sido eliminado",
+      backToBlog: "Volver al blog",
+      ctaTitle: "¿Quieres implementar esto en tu negocio?",
+      ctaDescription: "Agenda una sesión estratégica gratuita y descubre cómo la IA puede transformar tu empresa",
+      ctaButton: "Agenda tu demo gratuita",
+    },
   },
   en: {
     nav: {
@@ -547,6 +566,25 @@ const translations = {
           description: "Your success is our success, we are with you every step"
         }
       ]
+    },
+    blog: {
+      title: "Latest Articles",
+      subtitle: "Discover insights, success stories and trends in AI and automation",
+      pageTitle: "Blog",
+      pageDescription: "Articles about artificial intelligence, business automation and digital transformation",
+      readMore: "Read more",
+      viewAll: "View all articles",
+      minRead: "min read",
+      locale: "en-US",
+      noPosts: "No articles available",
+      noPostsDesc: "Come back soon to see our upcoming articles",
+      backHome: "Back home",
+      postNotFound: "Article not found",
+      postNotFoundDesc: "The article you're looking for doesn't exist or has been removed",
+      backToBlog: "Back to blog",
+      ctaTitle: "Want to implement this in your business?",
+      ctaDescription: "Schedule a free strategy session and discover how AI can transform your company",
+      ctaButton: "Schedule your free demo",
     },
   },
 };

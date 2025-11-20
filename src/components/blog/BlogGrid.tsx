@@ -31,8 +31,12 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
   if (!posts || posts.length === 0) return null;
 
   return (
-    <section className="py-20 px-4 bg-transparent relative overflow-hidden" id="blog">
-      <ConnectedParticles />
+    <section className="py-20 px-4 relative overflow-hidden" id="blog">
+      {/* Background with particles */}
+      <div className="absolute inset-0 bg-background">
+        <ConnectedParticles />
+      </div>
+      
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div

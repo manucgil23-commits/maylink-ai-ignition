@@ -25,7 +25,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="faq" className="py-20 md:py-32 relative overflow-hidden" aria-labelledby="faq-heading">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
       
       {/* Connected Particles Background */}
@@ -41,6 +41,7 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
+            id="faq-heading"
             className="text-4xl md:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -104,7 +105,7 @@ const FAQ = () => {
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
               <ConnectedParticles />
             </div>
-            <HelpCircle className="w-12 h-12 text-brand-purple mx-auto mb-4 relative z-10" />
+            <HelpCircle className="w-12 h-12 text-brand-purple mx-auto mb-4 relative z-10" aria-hidden="true" />
             <h3 className="text-2xl font-bold mb-2 relative z-10">{t.faq.moreQuestions}</h3>
             <p className="text-muted-foreground mb-6 relative z-10">
               {t.faq.contactUs}
@@ -113,6 +114,7 @@ const FAQ = () => {
               onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
               variant="cta"
               className="relative z-10"
+              aria-label="Agendar sesión de estrategia"
             >
               {t.faq.contactButton}
             </Button>

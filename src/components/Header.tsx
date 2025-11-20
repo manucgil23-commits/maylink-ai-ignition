@@ -65,10 +65,15 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
+      role="banner"
     >
-      <nav className={`container mx-auto px-4 transition-all duration-300 flex items-center justify-between ${
-        isScrolled ? "py-2" : "py-4"
-      }`}>
+      <nav 
+        className={`container mx-auto px-4 transition-all duration-300 flex items-center justify-between ${
+          isScrolled ? "py-2" : "py-4"
+        }`}
+        role="navigation"
+        aria-label="Navegación principal"
+      >
         <motion.div
           className="flex items-center gap-3 cursor-pointer"
           onClick={handleLogoClick}
@@ -77,9 +82,15 @@ const Header = () => {
           animate={{ scale: isScrolled ? 0.85 : 1 }}
           transition={{ duration: 0.3 }}
         >
-          <img src={logo} alt="MayLink AI" className={`transition-all duration-300 ${
-            isScrolled ? "w-14 h-14" : "w-20 h-20"
-          }`} />
+          <img 
+            src={logo} 
+            alt="MayLink AI Logo - Automatización inteligente con IA" 
+            className={`transition-all duration-300 ${
+              isScrolled ? "w-14 h-14" : "w-20 h-20"
+            }`} 
+            width={isScrolled ? 56 : 80}
+            height={isScrolled ? 56 : 80}
+          />
           <span className={`font-bold transition-all duration-300 ${
             isScrolled ? "text-xl" : "text-2xl"
           }`}>
@@ -111,13 +122,15 @@ const Header = () => {
             variant="outline"
             size="icon"
             className="border-brand-purple/50 hover:bg-brand-purple/10"
-            aria-label="Toggle language"
+            aria-label={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'español'}`}
+            title={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'español'}`}
           >
-            <Languages className="w-5 h-5" />
+            <Languages className="w-5 h-5" aria-hidden="true" />
           </Button>
           <Button
             onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
             variant="cta"
+            aria-label="Agendar sesión de estrategia"
           >
             {t.nav.contacto}
           </Button>
@@ -130,16 +143,19 @@ const Header = () => {
             variant="outline"
             size="icon"
             className="border-brand-purple/50 hover:bg-brand-purple/10"
-            aria-label="Toggle language"
+            aria-label={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'español'}`}
+            title={`Cambiar idioma a ${language === 'es' ? 'inglés' : 'español'}`}
           >
-            <Languages className="w-5 h-5" />
+            <Languages className="w-5 h-5" aria-hidden="true" />
           </Button>
           <button
             className="text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
       </nav>
@@ -147,10 +163,13 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div
+          id="mobile-menu"
           className="md:hidden bg-background/98 backdrop-blur-lg border-t border-border"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
+          role="navigation"
+          aria-label="Menú móvil"
         >
           <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
             {menuItems.map((item) => (
@@ -165,6 +184,7 @@ const Header = () => {
             <Button
               onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
               variant="cta"
+              aria-label="Agendar sesión de estrategia"
             >
               {t.nav.contacto}
             </Button>

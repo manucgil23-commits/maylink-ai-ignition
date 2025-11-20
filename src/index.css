@@ -70,4 +70,64 @@ All colors MUST be HSL.
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
   }
+
+  /* Focus Visible - Accesibilidad con teclado */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-purple ring-offset-2 ring-offset-background;
+  }
+
+  /* Mejora de hover en links */
+  a:focus-visible {
+    @apply outline-none ring-2 ring-brand-purple ring-offset-2 ring-offset-background rounded;
+  }
+}
+
+@layer utilities {
+  /* Hover Glow Effect */
+  .hover-glow {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Smooth Scale on Hover */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Skeleton Loading Animation */
+  .skeleton-pulse {
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  /* Smooth Fade In */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

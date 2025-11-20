@@ -200,7 +200,7 @@ const Services3D = () => {
                   }}
                 >
                   <Card
-                    className={`w-[350px] p-6 bg-gradient-card border-border transition-all duration-500 ${
+                    className={`w-[350px] p-6 bg-gradient-card border-border transition-all duration-500 hover-glow ${
                       absOffset === 0
                         ? "border-brand-purple shadow-purple"
                         : "border-border/50"

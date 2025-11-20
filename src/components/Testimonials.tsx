@@ -82,7 +82,7 @@ const Testimonials = () => {
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="p-8 md:p-12 bg-gradient-card border-border relative overflow-hidden min-h-[400px] flex flex-col">
+              <Card className="p-8 md:p-12 bg-gradient-card border-border relative overflow-hidden min-h-[400px] flex flex-col hover-glow transition-all duration-300">
                 <Quote className="absolute top-4 right-4 w-16 h-16 text-brand-purple/10" />
                 
                 <div className="flex flex-col md:flex-row gap-6 items-start flex-1">

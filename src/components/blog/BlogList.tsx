@@ -14,7 +14,15 @@ const BlogList = () => {
       <div className="max-w-7xl mx-auto px-4 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Skeleton key={i} className="h-[400px] rounded-lg" />
+            <div key={i} className="h-[400px] rounded-lg overflow-hidden bg-card border border-border">
+              <div className="h-48 bg-muted/20 skeleton-pulse" />
+              <div className="p-6 space-y-3">
+                <div className="h-4 bg-muted/20 rounded skeleton-pulse w-3/4" />
+                <div className="h-4 bg-muted/20 rounded skeleton-pulse w-full" />
+                <div className="h-4 bg-muted/20 rounded skeleton-pulse w-5/6" />
+                <div className="h-10 bg-muted/20 rounded skeleton-pulse w-1/2 mt-6" />
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -48,14 +56,17 @@ const BlogList = () => {
           >
             <Link
               to={`/blog/${post.slug}`}
-              className="group block h-full bg-card border border-border rounded-lg overflow-hidden hover:border-brand-purple transition-all duration-300 hover:shadow-purple"
+              className="group block h-full bg-card border border-border rounded-lg overflow-hidden hover:border-brand-purple transition-all duration-300 hover:shadow-purple hover-lift hover-glow focus-visible:ring-2 focus-visible:ring-brand-purple"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={post.cover_image}
-                  alt={post.title}
+                  alt={`${post.title} - Artículo sobre ${post.category}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  width="400"
+                  height="240"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="bg-brand-purple text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">

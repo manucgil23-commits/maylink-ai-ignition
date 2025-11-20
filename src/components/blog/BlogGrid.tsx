@@ -20,7 +20,15 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-[400px] rounded-lg" />
+              <div key={i} className="h-[400px] rounded-lg overflow-hidden bg-card border border-border">
+                <div className="h-48 bg-muted/20 skeleton-pulse" />
+                <div className="p-6 space-y-3">
+                  <div className="h-4 bg-muted/20 rounded skeleton-pulse w-3/4" />
+                  <div className="h-4 bg-muted/20 rounded skeleton-pulse w-full" />
+                  <div className="h-4 bg-muted/20 rounded skeleton-pulse w-5/6" />
+                  <div className="h-10 bg-muted/20 rounded skeleton-pulse w-1/2 mt-6" />
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -65,7 +73,7 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
             >
               <Link
                 to={`/blog/${post.slug}`}
-                className="group block h-full bg-card border border-border rounded-lg overflow-hidden hover:border-brand-purple transition-all duration-300 hover:shadow-purple"
+                className="group block h-full bg-card border border-border rounded-lg overflow-hidden hover:border-brand-purple transition-all duration-300 hover:shadow-purple hover-lift hover-glow focus-visible:ring-2 focus-visible:ring-brand-purple"
               >
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">

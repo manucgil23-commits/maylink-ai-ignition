@@ -1,11 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Code2, MessageSquareCode, Settings2, ArrowRight, Check, Globe, Zap, Palette } from "lucide-react";
+import { Code2, MessageSquareCode, Settings2, ArrowRight, Check, Globe, Zap, Palette, Play } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ConnectedParticles from "./ConnectedParticles";
 import { useLanguage } from "@/contexts/LanguageContext";
+import AutomationDemo from "./demos/AutomationDemo";
+import ChatbotDemo from "./demos/ChatbotDemo";
+import BrandingDemo from "./demos/BrandingDemo";
+import WebDevDemo from "./demos/WebDevDemo";
 
 const services = [
   {
@@ -95,6 +100,8 @@ const Services3D = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [selectedDemo, setSelectedDemo] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isAutoRotating) return;
@@ -120,6 +127,28 @@ const Services3D = () => {
     const element = document.getElementById("contacto");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const openDemo = (serviceTitle: string) => {
+    setSelectedDemo(serviceTitle);
+    setDemoOpen(true);
+    setIsAutoRotating(false);
+  };
+
+  const renderDemo = () => {
+    switch (selectedDemo) {
+      case "Automatización de Procesos":
+        return <AutomationDemo />;
+      case "IA Conversacional":
+        return <ChatbotDemo />;
+      case "Branding y Estrategia Digital":
+        return <BrandingDemo />;
+      case "Desarrollo Web y Aplicaciones":
+      case "Software a Medida":
+        return <WebDevDemo />;
+      default:
+        return null;
     }
   };
 
@@ -260,17 +289,30 @@ const Services3D = () => {
                     </ul>
 
                     {absOffset === 0 && (
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank');
-                        }}
-                        variant="cta"
-                        className="w-full mt-4"
-                      >
-                        {t.services.requestInfo}
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
+                      <div className="flex gap-2 mt-4">
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openDemo(service.title);
+                          }}
+                          variant="outline"
+                          className="flex-1 border-primary/30 hover:border-primary hover:bg-primary/5"
+                        >
+                          <Play className="w-4 h-4 mr-2" />
+                          <span>Demo</span>
+                        </Button>
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank');
+                          }}
+                          variant="cta"
+                          className="flex-1"
+                        >
+                          {t.services.requestInfo}
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </div>
                     )}
                   </Card>
                 </motion.div>
@@ -300,6 +342,20 @@ const Services3D = () => {
           </div>
         </div>
       </div>
+
+      {/* Demo Modal */}
+      <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              Demo Interactiva
+            </DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            {renderDemo()}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

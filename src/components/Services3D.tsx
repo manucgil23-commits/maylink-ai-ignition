@@ -124,7 +124,7 @@ const Services3D = () => {
   };
 
   return (
-    <section id="servicios" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="servicios" className="py-20 md:py-32 relative overflow-hidden" aria-labelledby="services-heading">
       {/* Connected Particles Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <ConnectedParticles />
@@ -138,6 +138,7 @@ const Services3D = () => {
           transition={{ duration: 0.6 }}
           >
             <motion.h2
+              id="services-heading"
               className="text-4xl md:text-5xl font-bold mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -159,7 +160,7 @@ const Services3D = () => {
         </motion.div>
 
         {/* Carousel 3D */}
-        <div className="relative h-[680px] flex items-center justify-center overflow-hidden mb-8">
+        <div className="relative h-[680px] flex items-center justify-center overflow-hidden mb-8" role="region" aria-label="Carrusel de servicios" aria-live="polite">
           <div className="relative w-full max-w-7xl">
             {services.map((service, index) => {
               // Calculate circular offset
@@ -232,7 +233,7 @@ const Services3D = () => {
                           ease: "easeInOut",
                         }}
                       >
-                        <Icon className="w-8 h-8 text-white relative z-10" strokeWidth={1.5} />
+                        <Icon className="w-8 h-8 text-white relative z-10" strokeWidth={1.5} aria-hidden="true" />
                       </motion.div>
                     </div>
 
@@ -253,7 +254,7 @@ const Services3D = () => {
                           animate={absOffset === 0 ? { opacity: 1, x: 0 } : { opacity: 0.5, x: 0 }}
                           transition={{ delay: absOffset === 0 ? 0.3 + i * 0.1 : 0 }}
                         >
-                          <Check className="w-3 h-3 text-brand-purple mt-0.5 flex-shrink-0" />
+                          <Check className="w-3 h-3 text-brand-purple mt-0.5 flex-shrink-0" aria-hidden="true" />
                           <span>{feature}</span>
                         </motion.li>
                       ))}
@@ -267,9 +268,10 @@ const Services3D = () => {
                         }}
                         variant="cta"
                         className="w-full mt-4"
+                        aria-label={`Solicitar información sobre ${t.services.packs[index].title}`}
                       >
                         {t.services.requestInfo}
-                        <ArrowRight className="ml-2 w-4 h-4" />
+                        <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                       </Button>
                     )}
                   </Card>
@@ -279,7 +281,7 @@ const Services3D = () => {
           </div>
 
           {/* Navigation dots */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 z-20" role="tablist" aria-label="Navegación de servicios">
             {services.map((_, index) => (
               <motion.button
                 key={index}
@@ -294,7 +296,9 @@ const Services3D = () => {
                 }`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
-                aria-label={`Ir al servicio ${index + 1}`}
+                aria-label={`Ir al servicio ${t.services.packs[index].title}`}
+                role="tab"
+                aria-selected={index === currentIndex}
               />
             ))}
           </div>

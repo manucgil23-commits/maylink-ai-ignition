@@ -61,7 +61,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="contacto" className="py-20 md:py-32 relative overflow-hidden" aria-labelledby="contact-heading">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
@@ -72,6 +72,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
+            id="contact-heading"
             className="text-4xl md:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -110,8 +111,8 @@ const Contact = () => {
             <div className="space-y-6">
               <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors">
-                    <Mail className="w-6 h-6 text-brand-purple" />
+                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
+                    <Mail className="w-6 h-6 text-brand-purple" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.email}</p>
@@ -127,8 +128,8 @@ const Contact = () => {
 
               <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors">
-                    <Phone className="w-6 h-6 text-brand-purple" />
+                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
+                    <Phone className="w-6 h-6 text-brand-purple" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.phone}</p>
@@ -144,8 +145,8 @@ const Contact = () => {
 
               <Card className="p-6 bg-gradient-card border-border hover:border-brand-purple transition-all group">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors">
-                    <MapPin className="w-6 h-6 text-brand-purple" />
+                  <div className="w-12 h-12 rounded-lg bg-brand-purple/10 flex items-center justify-center group-hover:bg-brand-purple/20 transition-colors" aria-hidden="true">
+                    <MapPin className="w-6 h-6 text-brand-purple" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="font-semibold mb-1">{t.contact.location}</p>
@@ -156,7 +157,7 @@ const Contact = () => {
             </div>
 
             <div className="p-6 bg-brand-purple/5 border border-brand-purple/20 rounded-lg">
-              <CheckCircle className="w-8 h-8 text-brand-purple mb-3" />
+              <CheckCircle className="w-8 h-8 text-brand-purple mb-3" aria-hidden="true" />
               <p className="font-semibold mb-2">{t.contact.guaranteeTitle}</p>
               <p className="text-sm text-muted-foreground">
                 {t.contact.guaranteeDescription}
@@ -181,8 +182,9 @@ const Contact = () => {
                   size="lg"
                   onClick={() => window.open('https://cal.com/maylinkai/sesiondeestrategia', '_blank')}
                   className="mx-auto"
+                  aria-label="Agendar sesión de estrategia en Cal.com"
                 >
-                  <Send className="w-5 h-5 mr-2" />
+                  <Send className="w-5 h-5 mr-2" aria-hidden="true" />
                   {t.contact.scheduleButton}
                 </Button>
               </div>

@@ -44,7 +44,7 @@ const WhyChooseUsEnhanced = () => {
   const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
 
   return (
-    <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden">
+    <section id="por-que-elegirnos" className="py-20 md:py-32 relative overflow-hidden" aria-labelledby="why-choose-heading">
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-secondary/20 to-background" />
       
       {/* Connected Particles Background */}
@@ -60,6 +60,7 @@ const WhyChooseUsEnhanced = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
+            id="why-choose-heading"
             className="text-4xl md:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

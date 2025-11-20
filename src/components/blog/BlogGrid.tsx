@@ -71,8 +71,11 @@ const BlogGrid = ({ limit = 3 }: BlogGridProps) => {
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={post.cover_image}
-                    alt={post.title}
+                    alt={`${post.title} - Artículo sobre ${post.category}`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    width="400"
+                    height="240"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-brand-purple text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">

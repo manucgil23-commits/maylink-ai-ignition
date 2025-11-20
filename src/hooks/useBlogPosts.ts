@@ -11,6 +11,8 @@ export interface BlogPost {
   cover_image: string;
   category: string;
   published_at: string;
+  created_at: string;
+  updated_at: string;
   author_name: string;
   reading_time: number;
   seo_keywords: string[];
@@ -46,6 +48,8 @@ export const useBlogPosts = (limit?: number) => {
         cover_image: post.cover_image,
         category: post.category,
         published_at: post.published_at,
+        created_at: post.created_at,
+        updated_at: post.updated_at,
         author_name: post.author_name,
         reading_time: post.reading_time,
         seo_keywords: post.seo_keywords || [],
@@ -80,6 +84,8 @@ export const useBlogPost = (slug: string) => {
         cover_image: data.cover_image,
         category: data.category,
         published_at: data.published_at,
+        created_at: data.created_at,
+        updated_at: data.updated_at,
         author_name: data.author_name,
         reading_time: data.reading_time,
         seo_keywords: data.seo_keywords || [],

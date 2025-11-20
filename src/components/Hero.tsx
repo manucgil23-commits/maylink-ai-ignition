@@ -24,8 +24,11 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img
           src={robotCityscape}
-          alt="Robot futurista observando ciudad"
+          alt="Robot futurista con inteligencia artificial observando ciudad tecnológica - Automatización empresarial"
           className="w-full h-full object-cover opacity-65"
+          loading="eager"
+          width="1920"
+          height="1080"
         />
         {/* Gradient overlays for smoother transition */}
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/50" />

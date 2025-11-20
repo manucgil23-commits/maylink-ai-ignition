@@ -62,7 +62,7 @@ const Footer = () => {
                 <Twitter className="w-5 h-5 text-muted-foreground group-hover:text-brand-purple transition-colors" />
               </motion.a>
               <motion.a
-                href="mailto:hola@maylink.ai"
+                href="mailto:maylinkai00@gmail.com"
                 className="w-10 h-10 rounded-lg bg-secondary hover:bg-brand-purple/20 flex items-center justify-center transition-all group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}

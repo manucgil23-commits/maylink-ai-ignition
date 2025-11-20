@@ -109,10 +109,19 @@ const WhyChooseUsEnhanced = () => {
                 className="flex"
               >
                 <Card
-                  className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col ${
+                  className={`p-6 bg-gradient-card border-border hover:border-brand-purple transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col hover-glow hover-lift focus-visible:ring-2 focus-visible:ring-brand-purple ${
                     isExpanded ? "border-brand-purple shadow-purple" : ""
                   }`}
                   onClick={(e) => toggleCard(e)}
+                  tabIndex={0}
+                  role="button"
+                  aria-expanded={isExpanded}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleCard(e as any);
+                    }
+                  }}
                 >
                   {/* Hover Glow Effect */}
                   <motion.div

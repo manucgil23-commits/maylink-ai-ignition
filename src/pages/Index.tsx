@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "@/components/Loader";
 import Header from "@/components/Header";
@@ -15,8 +15,23 @@ import StructuredData from "@/components/StructuredData";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const { t } = useLanguage();
+  const [isLoading, setIsLoading] = useState(() => {
+    // Only show loader on first visit in this session
+    const hasSeenLoader = sessionStorage.getItem('hasSeenLoader');
+    return !hasSeenLoader;
+  });
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        sessionStorage.setItem('hasSeenLoader', 'true');
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   // FAQ structured data - using first 3 questions
   const faqData = [

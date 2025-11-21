@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import SocialShare from "@/components/SocialShare";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -112,11 +113,11 @@ const BlogPost = () => {
             />
           </motion.div>
 
-          {/* Back Button */}
+          {/* Back Button and Share */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="mb-8"
+            className="mb-8 flex items-center justify-between"
           >
             <Link
               to="/blog"
@@ -125,6 +126,11 @@ const BlogPost = () => {
               <ArrowLeft className="w-4 h-4" />
               {t.blog.backToBlog}
             </Link>
+            <SocialShare 
+              url={`/blog/${post.slug}`}
+              title={post.title}
+              description={post.excerpt}
+            />
           </motion.div>
 
           {/* Header */}

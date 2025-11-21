@@ -205,7 +205,7 @@ const Services3D = () => {
                     y: -250,
                     scale: absOffset === 0 ? 1.15 : absOffset === 1 ? 0.85 : 0.6,
                     rotateY: offset * 15,
-                    z: absOffset === 0 ? 100 : absOffset === 1 ? 50 : 0,
+                    zIndex: absOffset === 0 ? 50 : absOffset === 1 ? 40 : 30,
                     opacity: absOffset > 2 ? 0 : absOffset === 2 ? 0.5 : absOffset === 1 ? 0.85 : 1,
                     filter: absOffset === 0 ? "blur(0px)" : "blur(0px)",
                   }}

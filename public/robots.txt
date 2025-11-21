@@ -2,8 +2,8 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://maylinkai.lovable.app/sitemap.xml
+# Sitemap (Dinámico)
+Sitemap: https://fiwykkjmgscmkrugronp.supabase.co/functions/v1/sitemap
 
 # Bots específicos
 User-agent: Googlebot

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
-import robotCityscape from "@/assets/robot-cityscape.jpg";
+import robotCityscape from "@/assets/robot-cityscape.webp";
 import TypewriterText from "./TypewriterText";
 import { useLanguage } from "@/contexts/LanguageContext";
 

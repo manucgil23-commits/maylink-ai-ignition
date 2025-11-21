@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import logo from "@/assets/maylink-logo.png";
+import logo from "@/assets/maylink-logo.webp";
 
 interface LoaderProps {
   onLoadingComplete: () => void;

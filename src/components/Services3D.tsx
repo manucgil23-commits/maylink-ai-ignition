@@ -204,10 +204,7 @@ const Services3D = () => {
                     x: offset * 380 - 175,
                     y: -250,
                     scale: absOffset === 0 ? 1.15 : absOffset === 1 ? 0.85 : 0.6,
-                    rotateY: offset * 15,
-                    zIndex: absOffset === 0 ? 50 : absOffset === 1 ? 40 : 30,
                     opacity: absOffset > 2 ? 0 : absOffset === 2 ? 0.5 : absOffset === 1 ? 0.85 : 1,
-                    filter: absOffset === 0 ? "blur(0px)" : "blur(0px)",
                   }}
                   transition={{
                     type: "spring",
@@ -215,14 +212,13 @@ const Services3D = () => {
                     damping: 35,
                   }}
                   style={{
-                    perspective: 1200,
-                    transformStyle: "preserve-3d",
+                    zIndex: absOffset === 0 ? 50 : absOffset === 1 ? 40 : 30,
                   }}
                   onClick={() => {
                     setCurrentIndex(index);
                     setIsAutoRotating(false);
                   }}
-                  whileHover={absOffset === 0 ? { scale: 1.25, rotateY: 0, y: -260 } : {}}
+                  whileHover={absOffset === 0 ? { scale: 1.25, y: -260 } : {}}
                   whileTap={absOffset === 0 ? { scale: 1.12 } : {}}
                 >
                   <Card

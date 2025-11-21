@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/maylink-logo.png";
+import logo from "@/assets/maylink-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
 

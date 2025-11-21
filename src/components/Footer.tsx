@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin, Instagram, Twitter, Mail } from "lucide-react";
-import logo from "@/assets/maylink-logo.png";
+import logo from "@/assets/maylink-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {

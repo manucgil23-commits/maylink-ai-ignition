@@ -67,6 +67,7 @@ const BlogList = () => {
                   alt={`${post.title} - Artículo sobre ${post.category}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
+                  decoding="async"
                   width="400"
                   height="240"
                 />

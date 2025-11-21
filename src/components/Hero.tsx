@@ -26,7 +26,8 @@ const Hero = () => {
           src={robotCityscape}
           alt="Robot futurista con inteligencia artificial observando ciudad tecnológica - Automatización empresarial"
           className="w-full h-full object-cover opacity-65 gpu-accelerated"
-          loading="eager"
+          loading="lazy"
+          decoding="async"
           width="1920"
           height="1080"
         />

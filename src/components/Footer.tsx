@@ -22,7 +22,15 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img src={logo} alt="MayLink AI" className="w-12 h-12" />
+              <img 
+                src={logo} 
+                alt="MayLink AI" 
+                className="w-12 h-12"
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+              />
               <span className="text-2xl font-bold">
                 May<span className="text-brand-purple">Link</span> AI
               </span>

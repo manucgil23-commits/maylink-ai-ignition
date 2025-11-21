@@ -1,4 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3'
+import { rateLimit, getRateLimitHeaders } from '../_shared/rateLimit.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -9,6 +10,21 @@ Deno.serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
+  }
+
+  // Rate limiting - 30 requests per minute per IP
+  const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+  const rateLimitResult = rateLimit(clientIp, { maxRequests: 30, windowMs: 60000 });
+  
+  if (!rateLimitResult.allowed) {
+    return new Response(JSON.stringify({ error: 'Too many requests' }), {
+      status: 429,
+      headers: {
+        ...corsHeaders,
+        ...getRateLimitHeaders(rateLimitResult.remaining, rateLimitResult.resetTime),
+        'Content-Type': 'application/json',
+      },
+    })
   }
 
   try {
@@ -76,6 +92,7 @@ ${allUrls.map(url => `  <url>
     return new Response(xmlContent, {
       headers: {
         ...corsHeaders,
+        ...getRateLimitHeaders(rateLimitResult.remaining, rateLimitResult.resetTime),
         'Content-Type': 'application/xml',
         'Cache-Control': 'public, max-age=3600', // Cache por 1 hora
       },

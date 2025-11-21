@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "@/components/Loader";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import WhyChooseUsEnhanced from "@/components/WhyChooseUsEnhanced";
-import Services3D from "@/components/Services3D";
-import BlogGrid from "@/components/blog/BlogGrid";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { useLanguage } from "@/contexts/LanguageContext";
+
+// Lazy load heavy components
+const WhyChooseUsEnhanced = lazy(() => import("@/components/WhyChooseUsEnhanced"));
+const Services3D = lazy(() => import("@/components/Services3D"));
+const BlogGrid = lazy(() => import("@/components/blog/BlogGrid"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const FAQ = lazy(() => import("@/components/FAQ"));
+const Contact = lazy(() => import("@/components/Contact"));
 
 const Index = () => {
   const { t } = useLanguage();
@@ -95,12 +97,14 @@ const Index = () => {
           <Header />
           <main>
             <Hero />
-            <WhyChooseUsEnhanced />
-            <Services3D />
-            <BlogGrid limit={3} />
-            <Testimonials />
-            <FAQ />
-            <Contact />
+            <Suspense fallback={<div className="min-h-screen" />}>
+              <WhyChooseUsEnhanced />
+              <Services3D />
+              <BlogGrid limit={3} />
+              <Testimonials />
+              <FAQ />
+              <Contact />
+            </Suspense>
           </main>
           <Footer />
         </>

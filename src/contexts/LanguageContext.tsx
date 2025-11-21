@@ -28,8 +28,8 @@ const translations = {
       titlePart2: "infinitas ",
       titlePart3: "posibilidades",
       description: "Creamos automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro. Soluciones personalizadas que transforman ideas en realidad.",
-      cta1: "Explorar servicios",
-      cta2: "Solicitar presupuesto",
+      cta1: "Descubre nuestros servicios",
+      cta2: "Agenda tu demo gratuita",
       stats: {
         projectsValue: "50+",
         projects: "Proyectos completados",
@@ -84,7 +84,7 @@ const translations = {
       title: "Nuestros ",
       titleHighlight: "Servicios",
       subtitle: "Elige el pack perfecto para impulsar tu transformación digital",
-      requestInfo: "Solicitar info",
+      requestInfo: "Solicita tu demo gratuita",
       price: "Consultar",
       packs: [
         {
@@ -232,7 +232,7 @@ const translations = {
       formNamePlaceholder: "Juan Pérez",
       formEmailPlaceholder: "tu@email.com",
       formMessagePlaceholder: "Cuéntanos sobre tu proyecto...",
-      formSubmit: "Enviar mensaje",
+      formSubmit: "Agendar demo gratuita",
       formSubmitting: "Enviando...",
       formPrivacy: "Al enviar este formulario, aceptas nuestra política de privacidad",
       errorTitle: "Error",
@@ -242,7 +242,7 @@ const translations = {
       successDescription: "Te responderemos en menos de 24 horas",
       bookingTitle: "Agenda tu sesión de estrategia",
       bookingDescription: "Elige el mejor horario para ti y hablemos de tu proyecto",
-      scheduleButton: "Agendar Reunión",
+      scheduleButton: "Reserva tu demo gratuita ahora",
     },
     footer: {
       description: "Conectando posibilidades infinitas. Automatizaciones con inteligencia artificial que impulsan tu negocio hacia el futuro.",
@@ -315,8 +315,8 @@ const translations = {
       titlePart2: "infinite ",
       titlePart3: "possibilities",
       description: "We create AI-powered automations that drive your business into the future. Customized solutions that transform ideas into reality.",
-      cta1: "Explore services",
-      cta2: "Request quote",
+      cta1: "Discover our services",
+      cta2: "Book your free demo",
       stats: {
         projectsValue: "50+",
         projects: "Completed projects",
@@ -371,7 +371,7 @@ const translations = {
       title: "Our ",
       titleHighlight: "Services",
       subtitle: "Choose the perfect package to boost your digital transformation",
-      requestInfo: "Request info",
+      requestInfo: "Book your free demo",
       price: "Consult",
       packs: [
         {

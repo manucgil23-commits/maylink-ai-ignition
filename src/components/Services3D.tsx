@@ -195,6 +195,9 @@ const Services3D = () => {
               const absOffset = Math.abs(offset);
               const Icon = service.icon;
               
+              // Don't render items that are too far away
+              if (absOffset > 2) return null;
+              
               return (
                 <motion.div
                   key={service.title}

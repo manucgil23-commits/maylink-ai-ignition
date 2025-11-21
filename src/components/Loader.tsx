@@ -10,7 +10,7 @@ const Loader = ({ onLoadingComplete }: LoaderProps) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 1800;
+    const duration = 1200;
     const interval = 25;
     const increment = 100 / (duration / interval);
 

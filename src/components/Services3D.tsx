@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ConnectedParticles from "./ConnectedParticles";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation";
+import { useTouchGestures } from "@/hooks/useTouchGestures";
 
 const services = [
   {
@@ -95,6 +97,28 @@ const Services3D = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
+
+  const nextService = () => {
+    setCurrentIndex((prev) => (prev + 1) % services.length);
+    setIsAutoRotating(false);
+  };
+
+  const prevService = () => {
+    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
+    setIsAutoRotating(false);
+  };
+
+  useKeyboardNavigation({
+    onNext: nextService,
+    onPrev: prevService,
+    isEnabled: isInView,
+  });
+
+  useTouchGestures({
+    onSwipeLeft: nextService,
+    onSwipeRight: prevService,
+    isEnabled: isInView,
+  });
 
   useEffect(() => {
     if (!isAutoRotating) return;

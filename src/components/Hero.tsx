@@ -1,22 +1,16 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowRight } from "lucide-react";
 import robotCityscape from "@/assets/robot-cityscape.jpg";
 import TypewriterText from "./TypewriterText";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRef } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
   const { t } = useLanguage();
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const particlesY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const { particlesY, contentY } = useScrollAnimation(ref);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -31,12 +25,12 @@ const Hero = () => {
       id="inicio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32"
     >
-      {/* Full Background Robot Image with Parallax */}
-      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
+      {/* Full Background Robot Image */}
+      <div className="absolute inset-0">
         <img
           src={robotCityscape}
           alt="Robot futurista con inteligencia artificial observando ciudad tecnológica - Automatización empresarial"
-          className="w-full h-full object-cover opacity-65"
+          className="w-full h-full object-cover opacity-65 gpu-accelerated"
           loading="eager"
           width="1920"
           height="1080"
@@ -45,14 +39,14 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
-      </motion.div>
+      </div>
 
       {/* Animated particles with Parallax */}
-      <motion.div className="absolute inset-0 z-[1]" style={{ y: particlesY }}>
+      <motion.div className="absolute inset-0 z-[1] will-change-transform" style={{ y: particlesY }}>
         {[...Array(60)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-brand-purple rounded-full"
+            className="absolute w-1 h-1 bg-brand-purple rounded-full will-change-transform"
             style={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
@@ -71,7 +65,7 @@ const Hero = () => {
         ))}
       </motion.div>
 
-      <motion.div className="container mx-auto px-4 relative z-10" style={{ y: contentY }}>
+      <motion.div className="container mx-auto px-4 relative z-10 will-change-transform" style={{ y: contentY }}>
         <div className="flex items-center justify-center lg:justify-start min-h-screen">
           {/* Text Content - Centered/Left aligned over full background */}
           <motion.div
@@ -177,15 +171,15 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
+        aria-hidden="true"
       >
         <div className="w-6 h-10 border-2 border-brand-purple rounded-full flex justify-center p-2">
           <motion.div
-            className="w-1.5 h-1.5 bg-brand-purple rounded-full"
+            className="w-1.5 h-1.5 bg-brand-purple rounded-full will-change-transform"
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           />

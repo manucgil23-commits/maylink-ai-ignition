@@ -92,6 +92,8 @@ const Header = () => {
             }`} 
             width={isScrolled ? 56 : 80}
             height={isScrolled ? 56 : 80}
+            loading="eager"
+            decoding="async"
           />
           <span className={`font-bold transition-all duration-300 ${
             isScrolled ? "text-xl" : "text-2xl"

@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Loader from "@/components/Loader";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = lazy(() => import("./pages/Index"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -87,6 +88,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ScrollToTop />
             <Suspense fallback={<Loader onLoadingComplete={() => {}} />}>
               <AnimatedRoutes />
             </Suspense>

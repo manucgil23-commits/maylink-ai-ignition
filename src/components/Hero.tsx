@@ -4,13 +4,9 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import robotCityscape from "@/assets/robot-cityscape.jpg";
 import TypewriterText from "./TypewriterText";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRef } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
   const { t } = useLanguage();
-  const ref = useRef(null);
-  const { particlesY, contentY } = useScrollAnimation(ref);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -21,7 +17,6 @@ const Hero = () => {
 
   return (
     <section
-      ref={ref}
       id="inicio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-32"
     >
@@ -41,8 +36,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
       </div>
 
-      {/* Animated particles with Parallax */}
-      <motion.div className="absolute inset-0 z-[1] will-change-transform" style={{ y: particlesY }}>
+      {/* Animated particles */}
+      <div className="absolute inset-0 z-[1]">
         {[...Array(60)].map((_, i) => (
           <motion.div
             key={i}
@@ -63,9 +58,9 @@ const Hero = () => {
             }}
           />
         ))}
-      </motion.div>
+      </div>
 
-      <motion.div className="container mx-auto px-4 relative z-10 will-change-transform" style={{ y: contentY }}>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex items-center justify-center lg:justify-start min-h-screen">
           {/* Text Content - Centered/Left aligned over full background */}
           <motion.div
@@ -169,7 +164,7 @@ const Hero = () => {
           </motion.div>
 
         </div>
-      </motion.div>
+      </div>
 
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"

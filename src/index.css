@@ -83,6 +83,21 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  /* Performance Optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
   /* Hover Glow Effect */
   .hover-glow {
     transition: var(--transition-smooth);
@@ -95,6 +110,7 @@ All colors MUST be HSL.
   /* Smooth Scale on Hover */
   .hover-lift {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
   
   .hover-lift:hover {
@@ -129,5 +145,10 @@ All colors MUST be HSL.
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  
+  /* Enhanced Focus States */
+  .focus-ring {
+    @apply focus-visible:ring-2 focus-visible:ring-brand-purple focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 }

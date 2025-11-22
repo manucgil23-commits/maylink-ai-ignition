@@ -5,25 +5,8 @@ import Footer from "@/components/Footer";
 import BlogList from "@/components/blog/BlogList";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import { useEffect } from "react";
-
 const Blog = () => {
   const { t } = useLanguage();
-
-  useEffect(() => {
-    // Set page title and meta description
-    document.title = `${t.blog.pageTitle} | Maylink AI`;
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", t.blog.pageDescription);
-    } else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content = t.blog.pageDescription;
-      document.head.appendChild(meta);
-    }
-  }, [t]);
 
   return (
     <>
